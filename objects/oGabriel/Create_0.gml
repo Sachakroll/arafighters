@@ -18,8 +18,8 @@ normal_grv = 0.3
 
 sneaksp = 0.4
 max_sneaksp = 2
-sneak_jumpforce = 7.5
-sneak_grv = 0.45
+sneak_jumpforce = 6
+sneak_grv = 0.5
 
 grv = normal_grv
 sneak_pixel_difference = 24
