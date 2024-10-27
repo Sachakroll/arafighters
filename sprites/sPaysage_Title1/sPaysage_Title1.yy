@@ -1,11 +1,11 @@
 {
   "$GMSprite":"",
   "%Name":"sPaysage_Title1",
-  "bboxMode":0,
+  "bboxMode":1,
   "bbox_bottom":359,
   "bbox_left":0,
   "bbox_right":639,
-  "bbox_top":167,
+  "bbox_top":0,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
