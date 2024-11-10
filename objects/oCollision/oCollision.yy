@@ -6,8 +6,8 @@
   "name":"oCollision",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objets",
-    "path":"folders/Objets.yy",
+    "name":"Combat",
+    "path":"folders/Objets/Combat.yy",
   },
   "parentObjectId":null,
   "persistent":false,

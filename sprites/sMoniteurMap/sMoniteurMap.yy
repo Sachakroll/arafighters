@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Sprites",
-    "path":"folders/Sprites.yy",
+    "name":"Moniteurs",
+    "path":"folders/Sprites/Moniteurs.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
