@@ -25,3 +25,30 @@ if oTitleMonitor.state = "rules" || oTitleMonitor.state = "load"
 {
 	image_alpha = 0
 }
+
+// Sélection
+
+if oTitleMonitor.selected_map = "cour"
+{
+	image_index = 0
+}
+if oTitleMonitor.selected_map = "rot"
+{
+	image_index = 1
+}
+if oTitleMonitor.selected_map = "stud"
+{
+	image_index = 2
+}
+if oTitleMonitor.selected_map = "jard"
+{
+	image_index = 3
+}
+if oTitleMonitor.selected_map = "l38"
+{
+	image_index = 4
+}
+if oTitleMonitor.selected_map = "bus"
+{
+	image_index = 5
+}

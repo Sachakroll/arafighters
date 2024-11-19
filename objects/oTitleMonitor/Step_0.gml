@@ -258,7 +258,151 @@ if state = "map"
 		state = "map to rules"
 		timer = 0
 	}
+	
+	if selected_map = "cour"
+	{
+		cour_rotonde_synchro = "cour"
+		l38_synchro = "cour"
+		if key_p1_cp_right
+		{
+			selected_map = "rot"
+		}else
+		{
+			if key_p1_cp_down
+			{
+				selected_map = "stud"
+			}else
+			{
+				if key_p1_cp_up
+				{
+					selected_map = "l38"
+				}
+			}
+		}
+	}
+	else
+	{
+		if selected_map = "rot"
+		{
+			cour_rotonde_synchro = "rot"
+			l38_synchro = "rot"
+			if key_p1_cp_right
+			{
+				selected_map = "jard"
+			}else
+			{
+				if key_p1_cp_left
+				{
+					selected_map = "cour"
+				}else
+				{
+					if key_p1_cp_down
+					{
+						selected_map = "stud"
+					}else
+					{
+						if key_p1_cp_up
+						{
+							selected_map = "l38"
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			if selected_map = "stud"
+			{
+				if key_p1_cp_right
+				{
+					selected_map = "bus"
+				}else
+				{
+					if key_p1_cp_down
+					{
+						selected_map = "bus"
+					}else
+					{
+						if key_p1_cp_up
+						{
+							if cour_rotonde_synchro = "cour"
+							{
+								selected_map = "cour"
+							}
+							if cour_rotonde_synchro = "rot"
+							{
+								selected_map = "rot"
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if selected_map = "jard"
+				{
+					cour_rotonde_synchro = "cour"
+					l38_synchro = "jard"
+					if key_p1_cp_left
+					{
+						selected_map = "rot"
+					}else
+					{
+						if key_p1_cp_down
+						{
+							selected_map = "bus"
+						}else
+						{
+							if key_p1_cp_up || key_p1_cp_right
+							{
+								selected_map = "l38"
+							}
+						}
+					}
+				}
+				else
+				{
+					if selected_map = "l38"
+					{
+						cour_rotonde_synchro = "cour"
+						if key_p1_cp_down || key_p1_cp_left
+						{
+							if l38_synchro = "cour"
+							{
+								selected_map = "cour"
+							}
+							if l38_synchro = "rot"
+							{
+								selected_map = "rot"
+							}
+							if l38_synchro = "jard"
+							{
+								selected_map = "jard"
+							}
+						}
+					}
+					else
+					{
+						if selected_map = "bus"
+						{
+							cour_rotonde_synchro = "cour"
+							if key_p1_cp_left
+							{
+								selected_map = "stud"
+							}else
+							{
+								if key_p1_cp_up
+								{
+									selected_map = "jard"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
-show_debug_message(p1_selected_char)
+show_debug_message(selected_map)
 show_debug_message("state = "+state)
