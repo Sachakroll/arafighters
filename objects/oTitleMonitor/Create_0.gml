@@ -17,5 +17,17 @@ p2_selected_char = half_char_number
 selected_map = "cour"
 cour_rotonde_synchro = "cour"
 l38_synchro = "cour"
+global.map = Map_1
+
+selected_rules = 1
+global.ruleset_style = "vies"
+global.ruleset_time = 5
+global.ruleset_vies = 5
+
+load_time = 120
+goto_delay = 30
+load_timer = 0
+load_logo_start = 540
+load_logo_movement = 640
 
 init = 0

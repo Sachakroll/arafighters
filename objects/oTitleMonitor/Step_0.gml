@@ -12,6 +12,7 @@ key_p1_cp_up = keyboard_check_pressed(global.player1_key_jump)
 key_p1_cp_down = keyboard_check_pressed(global.player1_key_sneak)
 key_p1_cp_left = keyboard_check_pressed(global.player1_key_left)
 key_p1_cp_right = keyboard_check_pressed(global.player1_key_right)
+key_p1_cp_ok = keyboard_check_pressed(global.player1_key_action1)
 
 key_p2_cp_up = keyboard_check_pressed(global.player2_key_jump)
 key_p2_cp_down = keyboard_check_pressed(global.player2_key_sneak)
@@ -223,10 +224,72 @@ if state = "rules"
 		state = "rules to char"
 		timer = 0
 	}
-	if key_gl_cp_ok
+	
+	if selected_rules = 1
 	{
-		state = "rules to map"
-		timer = 0
+		if key_p1_cp_left || key_p1_cp_right
+		{
+			if global.ruleset_style = "vies"
+			{
+				global.ruleset_style = "temps"
+			}else
+			{
+				global.ruleset_style = "vies"
+			}
+		}
+		if key_p1_cp_down || key_p1_cp_ok
+		{
+			selected_rules = 2
+		}
+	}else
+	{
+		if selected_rules = 2
+		{
+			if key_p1_cp_down || key_p1_cp_ok
+			{
+				selected_rules = 3
+			}
+			if key_p1_cp_up
+			{
+				selected_rules = 1
+			}
+			if global.ruleset_style = "temps"
+			{
+				if key_p1_cp_left && global.ruleset_time > 1
+				{
+					global.ruleset_time -= 1
+				}
+				if key_p1_cp_right
+				{
+					global.ruleset_time += 1
+				}
+			}
+			if global.ruleset_style = "vies"
+			{
+				if key_p1_cp_left && global.ruleset_vies > 1
+				{
+					global.ruleset_vies -= 1
+				}
+				if key_p1_cp_right
+				{
+					global.ruleset_vies += 1
+				}
+			}
+		}else
+		{
+			if selected_rules = 3
+			{
+				if key_p1_cp_up
+				{
+					selected_rules = 2
+				}
+				if key_gl_cp_ok
+				{
+					state = "rules to map"
+					timer = 0
+				}
+			}
+		}
 	}
 }
 
@@ -256,6 +319,11 @@ if state = "map"
 	if key_gl_cp_back
 	{
 		state = "map to rules"
+		timer = 0
+	}
+	if key_gl_cp_ok
+	{
+		state = "map to load"
 		timer = 0
 	}
 	
@@ -404,5 +472,34 @@ if state = "map"
 	}
 }
 
-show_debug_message(selected_map)
+if state = "map to load"
+{
+	if timer = anim1_dur
+	{
+		timer = -1
+		state = "load"
+		load_timer = 0
+		oLogo.y = load_logo_start
+	}
+}
+if state = "load to map"
+{
+	if timer = anim1_dur
+	{
+		timer = -1
+		state = "map"
+	}
+}
+
+if state = "load"
+{
+	load_timer += 1
+	if load_timer = load_time + goto_delay
+	{
+		room_goto(global.map)
+	}
+	oLogo.y_center -= load_logo_movement/load_time
+}
+
+show_debug_message("selected_map = "+selected_map)
 show_debug_message("state = "+state)

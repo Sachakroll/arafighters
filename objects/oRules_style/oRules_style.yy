@@ -1,20 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"oGlobal",
+  "%Name":"oRules_style",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"oGlobal",
+  "name":"oRules_style",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objets",
-    "path":"folders/Objets.yy",
+    "name":"Title",
+    "path":"folders/Objets/Title.yy",
   },
   "parentObjectId":null,
-  "persistent":true,
+  "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
@@ -32,9 +31,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sMoniteurGlobal",
-    "path":"sprites/sMoniteurGlobal/sMoniteurGlobal.yy",
+    "name":"sRules_style",
+    "path":"sprites/sRules_style/sRules_style.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }
