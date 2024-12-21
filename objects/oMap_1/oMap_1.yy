@@ -34,5 +34,5 @@
     "path":"sprites/sMoniteurMap/sMoniteurMap.yy",
   },
   "spriteMaskId":null,
-  "visible":false,
+  "visible":true,
 }

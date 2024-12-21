@@ -401,6 +401,12 @@ if state = "map"
 							{
 								selected_map = "rot"
 							}
+						}else
+						{
+							if key_p1_cp_left
+							{
+								cour_rotonde_synchro = "cour"
+							}
 						}
 					}
 				}
@@ -496,6 +502,31 @@ if state = "load"
 	load_timer += 1
 	if load_timer = load_time + goto_delay
 	{
+		//Chargement
+		
+		if p1_selected_char = 1 {global.player1_char = oGabriel}
+		if p2_selected_char = 1 {global.player2_char = oGabriel}
+		if p1_selected_char = 2 {global.player1_char = oPotvin}
+		if p2_selected_char = 2 {global.player2_char = oPotvin}
+		if p1_selected_char = 3 {global.player1_char = oGrandjean}
+		if p2_selected_char = 3 {global.player2_char = oGrandjean}
+		if p1_selected_char = 4 {global.player1_char = oMouvet}
+		if p2_selected_char = 4 {global.player2_char = oMouvet}
+		if p1_selected_char = 5 {global.player1_char = oSousa}
+		if p2_selected_char = 5 {global.player2_char = oSousa}
+		if p1_selected_char = 6 {global.player1_char = oHuvelle}
+		if p2_selected_char = 6 {global.player2_char = oHuvelle}
+		if p1_selected_char = 7 {global.player1_char = oSuppl_1}
+		if p2_selected_char = 7 {global.player2_char = oSuppl_1}
+		if p1_selected_char = 8 {global.player1_char = oLambe}
+		if p2_selected_char = 8 {global.player2_char = oLambe}
+		if p1_selected_char = 9 {global.player1_char = oBernard}
+		if p2_selected_char = 9 {global.player2_char = oBernard}
+		if p1_selected_char = 10 {global.player1_char = oBurniat}
+		if p2_selected_char = 10 {global.player2_char = oBurniat}
+		
+		//Début du combat
+		
 		room_goto(global.map)
 	}
 	oLogo.y_center -= load_logo_movement/load_time

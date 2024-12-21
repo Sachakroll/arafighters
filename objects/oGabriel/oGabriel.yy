@@ -10,10 +10,13 @@
   "name":"oGabriel",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objets",
-    "path":"folders/Objets.yy",
+    "name":"Personnages",
+    "path":"folders/Objets/Personnages.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oJoueur",
+    "path":"objects/oJoueur/oJoueur.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
