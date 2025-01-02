@@ -21,8 +21,6 @@ global.map = Map_1
 
 selected_rules = 1
 global.ruleset_style = "vies"
-global.ruleset_time = 5
-global.ruleset_vies = 5
 
 load_time = 120
 goto_delay = 30

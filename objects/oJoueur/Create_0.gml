@@ -1,5 +1,7 @@
 // Initialisation des variables
 
+push_possible = false
+
 hsp = 0
 vsp = 0
 sneak = false
@@ -9,6 +11,7 @@ still_timer = 0
 still = true
 
 n_projectile = 0
+mort = false
 
 // Initialisation des réglages
 
@@ -28,8 +31,29 @@ sneak_grv = 0.5
 
 grv = normal_grv
 sneak_pixel_difference = 24
-still_cooldown_duration = 150
+still_cooldown_duration = 300
 max_jump_amount = 2
 
 frct = 0.3
 air_frct = 0.05
+
+push_force = 1
+facteur_repulsion = 0.1
+
+// Initialisation des attaques
+
+has_boomerang = false
+
+// Initialisation des vies et du timer
+
+if global.ruleset_style = "vies"
+{
+	vies = global.ruleset_vies
+}
+if global.ruleset_style = "temps"
+{
+	vies = 0
+}
+
+mort = false
+mort_fin = false

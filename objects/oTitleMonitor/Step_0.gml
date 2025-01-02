@@ -7,6 +7,8 @@ key_gl_cp_ok = keyboard_check_pressed(global.player1_key_action1) || keyboard_ch
 key_gl_cp_back = keyboard_check_pressed(global.player1_key_action2) || keyboard_check_pressed(global.player2_key_action2)
 key_gl_cp_up = keyboard_check_pressed(global.player1_key_jump) || keyboard_check_pressed(global.player2_key_jump)
 key_gl_cp_down = keyboard_check_pressed(global.player1_key_sneak) || keyboard_check_pressed(global.player2_key_sneak)
+key_gl_cp_left = keyboard_check_pressed(global.player1_key_left) || keyboard_check_pressed(global.player2_key_left)
+key_gl_cp_right = keyboard_check_pressed(global.player1_key_right) || keyboard_check_pressed(global.player2_key_right)
 
 key_p1_cp_up = keyboard_check_pressed(global.player1_key_jump)
 key_p1_cp_down = keyboard_check_pressed(global.player1_key_sneak)
@@ -227,7 +229,7 @@ if state = "rules"
 	
 	if selected_rules = 1
 	{
-		if key_p1_cp_left || key_p1_cp_right
+		if key_gl_cp_left || key_gl_cp_right
 		{
 			if global.ruleset_style = "vies"
 			{
@@ -237,7 +239,7 @@ if state = "rules"
 				global.ruleset_style = "vies"
 			}
 		}
-		if key_p1_cp_down || key_p1_cp_ok
+		if key_gl_cp_down || key_gl_cp_ok
 		{
 			selected_rules = 2
 		}
@@ -245,32 +247,32 @@ if state = "rules"
 	{
 		if selected_rules = 2
 		{
-			if key_p1_cp_down || key_p1_cp_ok
+			if key_gl_cp_down || key_gl_cp_ok
 			{
 				selected_rules = 3
 			}
-			if key_p1_cp_up
+			if key_gl_cp_up
 			{
 				selected_rules = 1
 			}
 			if global.ruleset_style = "temps"
 			{
-				if key_p1_cp_left && global.ruleset_time > 1
+				if key_gl_cp_left && global.ruleset_time > 1
 				{
 					global.ruleset_time -= 1
 				}
-				if key_p1_cp_right
+				if key_gl_cp_right
 				{
 					global.ruleset_time += 1
 				}
 			}
 			if global.ruleset_style = "vies"
 			{
-				if key_p1_cp_left && global.ruleset_vies > 1
+				if key_gl_cp_left && global.ruleset_vies > 1
 				{
 					global.ruleset_vies -= 1
 				}
-				if key_p1_cp_right
+				if key_gl_cp_right
 				{
 					global.ruleset_vies += 1
 				}
@@ -279,7 +281,7 @@ if state = "rules"
 		{
 			if selected_rules = 3
 			{
-				if key_p1_cp_up
+				if key_gl_cp_up
 				{
 					selected_rules = 2
 				}
@@ -331,17 +333,17 @@ if state = "map"
 	{
 		cour_rotonde_synchro = "cour"
 		l38_synchro = "cour"
-		if key_p1_cp_right
+		if key_gl_cp_right
 		{
 			selected_map = "rot"
 		}else
 		{
-			if key_p1_cp_down
+			if key_gl_cp_down
 			{
 				selected_map = "stud"
 			}else
 			{
-				if key_p1_cp_up
+				if key_gl_cp_up
 				{
 					selected_map = "l38"
 				}
@@ -354,22 +356,22 @@ if state = "map"
 		{
 			cour_rotonde_synchro = "rot"
 			l38_synchro = "rot"
-			if key_p1_cp_right
+			if key_gl_cp_right
 			{
 				selected_map = "jard"
 			}else
 			{
-				if key_p1_cp_left
+				if key_gl_cp_left
 				{
 					selected_map = "cour"
 				}else
 				{
-					if key_p1_cp_down
+					if key_gl_cp_down
 					{
 						selected_map = "stud"
 					}else
 					{
-						if key_p1_cp_up
+						if key_gl_cp_up
 						{
 							selected_map = "l38"
 						}
@@ -381,17 +383,17 @@ if state = "map"
 		{
 			if selected_map = "stud"
 			{
-				if key_p1_cp_right
+				if key_gl_cp_right
 				{
 					selected_map = "bus"
 				}else
 				{
-					if key_p1_cp_down
+					if key_gl_cp_down
 					{
 						selected_map = "bus"
 					}else
 					{
-						if key_p1_cp_up
+						if key_gl_cp_up
 						{
 							if cour_rotonde_synchro = "cour"
 							{
@@ -403,7 +405,7 @@ if state = "map"
 							}
 						}else
 						{
-							if key_p1_cp_left
+							if key_gl_cp_left
 							{
 								cour_rotonde_synchro = "cour"
 							}
@@ -417,17 +419,17 @@ if state = "map"
 				{
 					cour_rotonde_synchro = "cour"
 					l38_synchro = "jard"
-					if key_p1_cp_left
+					if key_gl_cp_left
 					{
 						selected_map = "rot"
 					}else
 					{
-						if key_p1_cp_down
+						if key_gl_cp_down
 						{
 							selected_map = "bus"
 						}else
 						{
-							if key_p1_cp_up || key_p1_cp_right
+							if key_gl_cp_up || key_gl_cp_right
 							{
 								selected_map = "l38"
 							}
@@ -439,7 +441,7 @@ if state = "map"
 					if selected_map = "l38"
 					{
 						cour_rotonde_synchro = "cour"
-						if key_p1_cp_down || key_p1_cp_left
+						if key_gl_cp_down || key_gl_cp_left
 						{
 							if l38_synchro = "cour"
 							{
@@ -460,12 +462,12 @@ if state = "map"
 						if selected_map = "bus"
 						{
 							cour_rotonde_synchro = "cour"
-							if key_p1_cp_left
+							if key_gl_cp_left
 							{
 								selected_map = "stud"
 							}else
 							{
-								if key_p1_cp_up
+								if key_gl_cp_up
 								{
 									selected_map = "jard"
 								}

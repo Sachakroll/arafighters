@@ -1,6 +1,5 @@
   ////@description Animations
 
-
 image_speed = 1
 var sprite = s_prefix
 

@@ -8,3 +8,14 @@ if state = "fade1"
 		state = "intro"
 	}
 }
+
+// Timer
+
+if global.ruleset_style = "vies"
+{global.battle_timer ++}
+if global.ruleset_style = "temps"
+{
+	global.battle_timer --
+	if global.battle_timer = 0
+	{room_goto(Title)}
+}

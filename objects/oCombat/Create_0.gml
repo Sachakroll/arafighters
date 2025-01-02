@@ -10,10 +10,22 @@ fade_timer = 0
 
 global.player1_char = oGabriel
 global.player2_char = oPotvin
+global.player1_hitbox_sprite = sGabriel_hitbox
+global.player2_hitbox_sprite = sPotvin_hitbox
 
-// Barre de vie
+// Initilisation du timer
+
+if global.ruleset_style = "temps"
+{global.battle_timer = global.ruleset_time*3600+60}
+if global.ruleset_style = "vies"
+{global.battle_timer = 0}
+
+// Réglages de l'interface
 
 ecart_x_barre_pv = 10
 ecart_y_barre_pv = 10
-taille_x_barre_pv = 499
+taille_x_barre_pv = 479
 taille_y_barre_pv = 39
+
+x_pos_timer = 600
+x_char_size = 24

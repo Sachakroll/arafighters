@@ -1,5 +1,10 @@
 fullscreen = false
 
+// Initialisation du jeu
+
+global.ruleset_time = 5
+global.ruleset_vies = 1
+
 // Contrôles par défaut
 
 global.player2_key_left = vk_left
