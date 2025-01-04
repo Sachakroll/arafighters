@@ -1,35 +1,21 @@
-  ////@description Animations
+///@description Animations
 
 image_speed = 1
 var sprite = s_prefix
 
-if sneak = true
+// Choix du sprite
+
+if sneak {sprite += "_sneak"}
+else {sprite += "_m"}
+
+if still = true {sprite += "_still"}
+else
 {
-	if dir = -1
-	{
-		if hsp = 0 {sprite += "sneak_g"}
-		      else {sprite += "sneak_r_g"}
-	}
-	if dir = 1
-	{
-		if hsp = 0 {sprite += "sneak_d"}
-		      else {sprite += "sneak_r_d"}
-	}
-	if dir = 0     {sprite += "sneak_still"}
+	if hsp != 0 {sprite += "_r"}
+	if dir = -1 {sprite += "_g"}
+	if dir = 1  {sprite += "_d"}
 }
-if sneak = false
-{
-	if dir = -1
-	{
-		if hsp = 0 {sprite += "m_g"}
-		      else {sprite += "m_r_g"}
-	}
-	if dir = 1
-	{
-		if hsp = 0 {sprite += "m_d"}
-		      else {sprite += "m_r_d"}
-	}
-	if dir = 0     {sprite += "m_still"}
-}
+
+// Application du sprite
 
 sprite_index = asset_get_index(sprite)

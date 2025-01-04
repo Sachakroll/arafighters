@@ -1,6 +1,6 @@
-//Récupération des touches pressées
+// Récupération des touches pressées
 
-if mort = false
+if !mort
 {
 	if player = 1
 	{
@@ -22,35 +22,35 @@ if mort = false
 	}
 }
 
-//Mouvement
+// Mouvement
 
 move = key_right - key_left
 
-//Sneak on/off
+// Sneak on/off
 
 if key_sneak {sneak = true}
 if !key_sneak && !place_meeting(x, y-sneak_pixel_difference, oCollision)
 {sneak = false}
 
-//Vitesse et gravité en sneak / pas en sneak
+// Vitesse et gravité en sneak / pas en sneak
 
-if sneak {if abs(hsp+(move*sneaksp)) <= max_sneaksp
-	{hsp += move * sneaksp}
+if sneak {if abs(hsp+(move*sneak_acc)) <= max_sneaksp
+	{hsp += move * sneak_acc}
 	else {hsp = max_sneaksp * sign(hsp)}
 	grv = sneak_grv}
 
-if !sneak {if abs(hsp+(move*walksp)) <= max_walksp
-	{hsp += move * walksp}
+if !sneak {if abs(hsp+(move*walk_acc)) <= max_walksp
+	{hsp += move * walk_acc}
 	else {hsp = max_walksp * sign(hsp)}
 	grv = normal_grv}
 	
-//Est-ce que le joueur est sur le sol
+// Est-ce que le joueur est sur le sol
 
 if place_meeting(x, y+1, oCollision)
      {on_ground = true}
 else {on_ground = false}
 
-//Frottements différents dans l'air et sur le sol
+// Frottements différents dans l'air et sur le sol
 
 if on_ground
 {
@@ -65,24 +65,23 @@ if !on_ground
 	if hsp > -air_frct && hsp < air_frct && move = 0     {hsp = 0}
 }
 
-//Application de la gravité
+// Application de la gravité
 
 vsp = vsp + grv
 
-//Saut
+// Saut
 
-if on_ground {jumpcount = 0}
+if on_ground {doublejump_count = 0}
 
 if on_ground && key_jump
 {
 	if sneak {vsp = -sneak_jumpforce}
 	else {vsp = -normal_jumpforce}
-	jumpcount += 1
 }
-if (!on_ground && vsp > 0 && jumpcount > 0 && jumpcount < max_jump_amount && !place_meeting(x, y+8, oCollision)) && key_jump && sneak = false
+if !on_ground && vsp > 0 && doublejump_count < max_doublejump_amount && !place_meeting(x, y+min_doublejump_height, oCollision) && key_jump && !sneak
 {
 	vsp = -normal_doublejumpforce
-	jumpcount += 1
+	doublejump_count += 1
 }
 
 // Pousser l'adversaire
@@ -168,8 +167,7 @@ if place_meeting(x, y+vsp, oCollision)
 
 var inst_coll = instance_place(x, y, oCollision)
 if inst_coll != noone
-{hsp -= sign(inst_coll.x-x)
-	}
+{hsp -= sign(inst_coll.x-x)}
 
 // Exécution du mouvement
 
@@ -179,26 +177,27 @@ y = y + vsp
 // Etablir la direction du personnage
 
 if key_left {dir = -1
-	still_timer = 0}
+	still_timer = 0
+	still = false}
 if key_right {dir = 1
-	still_timer = 0}
+	still_timer = 0
+	still = false}
 
 still_timer++
-if still_timer >= still_cooldown_duration {dir = 0}
+if still_timer >= still_cooldown_duration {still = true}
 
-// Mort
+// Dégats
 
-if pv <= 0 && !mort_fin
+dmg_timer ++
+
+// Résurrection
+
+if mort && !mort_fin && resurrect_timer >= resurrect_cooldown
 {
-	vies -= 1
+	mort = false
 	pv = max_pv
 }
-if global.ruleset_style = "vies" && vies = 0
-{
-	mort = true
-	mort_fin = true
-	pv = 0
-}
+resurrect_timer	++
 
 // Collisions avec un projectile
 
@@ -216,9 +215,7 @@ for (var i = 0; i < array_length(collisions); i++)
 	
 	if projectile.type = "boomerang" && projectile.actif = true
 	{
-		hsp += projectile.recul_hsp*sign(projectile.hsp)
-		pv -= projectile.degats
-		if projectile.retour = 0 {projectile.retour = 1}
+		damage(projectile.degats, 0)
 		projectile.actif = false
 	}
 }
@@ -233,19 +230,26 @@ if has_boomerang
 	{
 		if (n_boomerang < n_max_boomerang)
 		{
-			if move = sign(hsp) {added_initial_hsp = hsp}
-			else {added_initial_hsp = 0}
+			if move = sign(hsp)
+			{
+				added_speed = hsp
+				added_portee = boomerang_coefficient_portee_bonus * hsp
+			}
+			else
+			{
+				added_speed = 0
+				added_portee = 0
+			}
 			instance_create_layer(x, y-hand_height, "Player", oProjectile,
 			{
 				type : "boomerang",
 				expediteur: id,
 				friendly_fire : false,
-				sprite_index: sBoomerang,
-				portee : dir*boomerang_portee,
-				vitesse : dir*boomerang_sp + added_initial_hsp,
+				sprite_index: boomerang_sprite,
+				portee : dir*boomerang_portee + added_portee,
+				vitesse : dir*boomerang_sp + added_speed,
 				temps_acc_retour : boomerang_comeback_acc_time,
-				degats : boomerang_dmg,
-				recul_hsp : boomerang_recul_hsp
+				degats : boomerang_dmg
 			})
 		}
 	}

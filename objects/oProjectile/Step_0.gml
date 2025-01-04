@@ -45,6 +45,11 @@ if type = "boomerang"
 		instance_destroy()
 	}
 	
+	// Ne fait pas de dégats plusieurs fois pendant la même collision
+	
+	if instance_place(x, y, expediteur) = noone && instance_place(x, y, expediteur.adv_inst) = noone
+	{actif = true}
+	
 	// Collisions avec un projectile
 	
 	/*var collisions = []
@@ -66,7 +71,7 @@ if type = "boomerang"
 
 // Disparation quand le projectile sort de l'écran
 
-if x < -40 || x > 680
+if x < -40 || x > 680 || y < -40 || y > 400
 {instance_destroy()}
 
 // Mouvement

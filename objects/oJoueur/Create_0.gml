@@ -6,7 +6,7 @@ hsp = 0
 vsp = 0
 sneak = false
 on_ground = true
-jumpcount = 0
+doublejump_count = 0
 still_timer = 0
 still = true
 
@@ -15,16 +15,13 @@ mort = false
 
 // Initialisation des réglages
 
-max_pv = 100
-pv = max_pv
-
-walksp = 0.7
+walk_acc = 0.7
 max_walksp = 4
 normal_jumpforce = 8.5
 normal_doublejumpforce = 6.5
 normal_grv = 0.3
 
-sneaksp = 0.4
+sneak_acc = 0.4
 max_sneaksp = 2
 sneak_jumpforce = 6
 sneak_grv = 0.5
@@ -32,7 +29,8 @@ sneak_grv = 0.5
 grv = normal_grv
 sneak_pixel_difference = 24
 still_cooldown_duration = 300
-max_jump_amount = 2
+max_doublejump_amount = 1
+min_doublejump_height = 8
 
 frct = 0.3
 air_frct = 0.05
@@ -44,7 +42,7 @@ facteur_repulsion = 0.1
 
 has_boomerang = false
 
-// Initialisation des vies et du timer
+// Initialisation de la vie et du timer
 
 if global.ruleset_style = "vies"
 {
@@ -55,5 +53,43 @@ if global.ruleset_style = "temps"
 	vies = 0
 }
 
+max_pv = 100
+pv = max_pv
+
+dmg_cooldown = 20
+dmg_timer = 0
+
 mort = false
 mort_fin = false
+
+resurrect_timer = 0
+resurrect_cooldown = 60
+
+// Fonction dégats
+
+function damage(pv_loss, recul)
+{
+	if dmg_timer >= dmg_cooldown && !mort_fin && !mort
+	{
+		// Dégats si on ne meurt pas
+		if pv-pv_loss > 0
+		{pv -= pv_loss}
+		// Dégats si on meurt
+		else if pv-pv_loss <= 0
+		{
+			pv = 0
+			vies -= 1
+			mort = true
+			resurrect_timer = 0
+		}
+		// Recul
+		hsp += recul
+		// Reset le cooldown de dégats
+		dmg_timer = 0
+	}
+	// Mort finale (plus de vies)
+	if global.ruleset_style = "vies" && vies = 0
+	{
+		mort_fin = true
+	}
+}
