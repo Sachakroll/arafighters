@@ -56,8 +56,10 @@ if global.ruleset_style = "temps"
 max_pv = 100
 pv = max_pv
 
-dmg_cooldown = 20
-dmg_timer = 0
+dmg_timer = 0 // Temps écoulé depuis que le joueur a pris des dégâts
+dmg_cooldown = 20 // Durée du temps d'invicibilité après avoir pris des dégâts
+dmg_cooldown_to_can_attack = 20 // Durée pendant laquelle le joueur ne peut pas attaquer après s'être pris des dégâts
+can_attack = false
 
 mort = false
 mort_fin = false
@@ -93,3 +95,7 @@ function damage(pv_loss, recul)
 		mort_fin = true
 	}
 }
+
+// Création du oPointeur_joueur
+
+instance_create_layer(x, y, "Player", oPointeur_joueur, {owner : id})

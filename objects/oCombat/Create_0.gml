@@ -20,6 +20,8 @@ if global.ruleset_style = "temps"
 if global.ruleset_style = "vies"
 {global.battle_timer = 0}
 
+global.pause = 0
+
 // Réglages de l'interface
 
 ecart_x_barre_pv = 10
@@ -29,3 +31,8 @@ taille_y_barre_pv = 39
 
 x_pos_timer = 600
 x_char_size = 24
+
+// Initialisation des mécaniques de combat
+
+global.x_offscreen_projectile_margin = 64
+global.y_offscreen_projectile_margin = 32

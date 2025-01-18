@@ -1,3 +1,5 @@
+if global.pause = 0 {
+
 // Récupération des touches pressées
 
 if !mort
@@ -46,7 +48,7 @@ if !sneak {if abs(hsp+(move*walk_acc)) <= max_walksp
 	
 // Est-ce que le joueur est sur le sol
 
-if place_meeting(x, y+1, oCollision)
+if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme))
      {on_ground = true}
 else {on_ground = false}
 
@@ -169,6 +171,20 @@ var inst_coll = instance_place(x, y, oCollision)
 if inst_coll != noone
 {hsp -= sign(inst_coll.x-x)}
 
+if place_meeting(x, y, adv_inst)
+{hsp -= sign(adv_inst.x-x)}
+
+// Collisions avec les plateformes
+
+if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && !sneak
+{
+	while !place_meeting(x, y+sign(vsp), oPlateforme) && !place_meeting(x, y, oPlateforme)
+	{
+		y = y + sign(vsp)
+	}
+	vsp = 0
+}
+
 // Exécution du mouvement
 
 x = x + hsp
@@ -186,9 +202,12 @@ if key_right {dir = 1
 still_timer++
 if still_timer >= still_cooldown_duration {still = true}
 
-// Dégats
+// Dégats et capacité d'attaquer
 
 dmg_timer ++
+if dmg_timer >= dmg_cooldown_to_can_attack
+     {can_attack = true}
+else {can_attack = false}
 
 // Résurrection
 
@@ -224,9 +243,9 @@ for (var i = 0; i < array_length(collisions); i++)
 
 if has_boomerang
 {
-	n_boomerang = projectile_nb_check(oProjectile, sBoomerang, id)
+	n_boomerang = projectile_nb_check(oProjectile, sGab_boomerang, id)
 	
-	if key_action_1 && (key_left || key_right || hsp != 0)
+	if key_action_1 && (key_left || key_right || hsp != 0) && can_attack
 	{
 		if (n_boomerang < n_max_boomerang)
 		{
@@ -246,6 +265,7 @@ if has_boomerang
 				expediteur: id,
 				friendly_fire : false,
 				sprite_index: boomerang_sprite,
+				rotation_sp : boomerang_rotation_sp,
 				portee : dir*boomerang_portee + added_portee,
 				vitesse : dir*boomerang_sp + added_speed,
 				temps_acc_retour : boomerang_comeback_acc_time,
@@ -253,4 +273,6 @@ if has_boomerang
 			})
 		}
 	}
+}
+
 }

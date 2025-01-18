@@ -17,7 +17,7 @@ p2_selected_char = half_char_number
 selected_map = "cour"
 cour_rotonde_synchro = "cour"
 l38_synchro = "cour"
-global.map = Map_1
+global.map = Map_bus
 
 selected_rules = 1
 global.ruleset_style = "vies"

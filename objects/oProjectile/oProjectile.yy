@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sBoomerang",
-    "path":"sprites/sBoomerang/sBoomerang.yy",
+    "name":"sGab_boomerang",
+    "path":"sprites/sGab_boomerang/sGab_boomerang.yy",
   },
   "spriteMaskId":null,
   "visible":true,

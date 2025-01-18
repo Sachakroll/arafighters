@@ -1,5 +1,11 @@
+if global.pause = 0 {
+
 if type = "boomerang"
 {
+	// Rotation
+	
+	image_angle += rotation_sp*vitesse/expediteur.boomerang_sp
+	
 	// Mouvement du boomerang
 	
 	if retour = 0
@@ -71,10 +77,12 @@ if type = "boomerang"
 
 // Disparation quand le projectile sort de l'écran
 
-if x < -40 || x > 680 || y < -40 || y > 400
+if x < -global.x_offscreen_projectile_margin || x > 640+global.x_offscreen_projectile_margin || y < -global.y_offscreen_projectile_margin || y > 360+global.y_offscreen_projectile_margin
 {instance_destroy()}
 
 // Mouvement
 
 x += hsp
 y += vsp
+
+}
