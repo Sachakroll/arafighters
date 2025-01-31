@@ -9,8 +9,8 @@
   "name":"oMap_bus_panneau",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objets",
-    "path":"folders/Objets.yy",
+    "name":"Maps",
+    "path":"folders/Objets/Maps.yy",
   },
   "parentObjectId":null,
   "persistent":false,

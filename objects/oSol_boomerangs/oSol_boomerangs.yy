@@ -1,15 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"oMap_bus",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"oSol_boomerangs",
+  "eventList":[],
   "managed":true,
-  "name":"oMap_bus",
+  "name":"oSol_boomerangs",
   "overriddenProperties":[],
   "parent":{
-    "name":"Maps",
-    "path":"folders/Objets/Maps.yy",
+    "name":"Combat",
+    "path":"folders/Objets/Combat.yy",
   },
   "parentObjectId":null,
   "persistent":false,
@@ -30,9 +28,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sMap_bus",
-    "path":"sprites/sMap_bus/sMap_bus.yy",
+    "name":"sSol_projectiles",
+    "path":"sprites/sSol_projectiles/sSol_projectiles.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

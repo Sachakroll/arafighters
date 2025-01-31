@@ -30,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sGab_boomerang",
-    "path":"sprites/sGab_boomerang/sGab_boomerang.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

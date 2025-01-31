@@ -4,14 +4,17 @@ if type = "boomerang"
 {
 	// Rotation
 	
-	image_angle += rotation_sp*vitesse/expediteur.boomerang_sp
+	image_angle += rotation_sp*vitesse_x/expediteur.boomerang_sp
 	
 	// Mouvement du boomerang
 	
 	if retour = 0
 	{
 		//info : temps = pi*portee/vitesse
-		hsp = vitesse*cos(timer*vitesse/portee)
+		hsp = vitesse_x*cos(timer*vitesse_x/portee_x)
+		if portee_y != 0 {vsp = vitesse_y*cos(timer*vitesse_y/portee_y)}
+		if vsp > 0 && place_meeting(x, y+vsp, oSol_boomerangs) {has_hit_ground = true}
+		if has_hit_ground {vsp = 0}
 		timer++
 	}
 	if retour = 1 
@@ -39,6 +42,7 @@ if type = "boomerang"
 	// Déclenchement du retour du boomerang
 	
 	if x*initial_dir < initial_x*initial_dir && retour = 0 {retour = 1}
+	//if sign(hsp) != initial_dir && retour = 0 {retour = 1}
 	
 	// Récuperation du boomerang
 	

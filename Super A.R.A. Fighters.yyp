@@ -12,6 +12,7 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Objets","folderPath":"folders/Objets.yy","name":"Objets","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Combat","folderPath":"folders/Objets/Combat.yy","name":"Combat","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Maps","folderPath":"folders/Objets/Maps.yy","name":"Maps","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Personnages","folderPath":"folders/Objets/Personnages.yy","name":"Personnages","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Title","folderPath":"folders/Objets/Title.yy","name":"Title","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Character_select","folderPath":"folders/Objets/Title/Character_select.yy","name":"Character_select","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -94,6 +95,7 @@
     {"id":{"name":"oRules_style","path":"objects/oRules_style/oRules_style.yy",},},
     {"id":{"name":"oRules_time_vies","path":"objects/oRules_time_vies/oRules_time_vies.yy",},},
     {"id":{"name":"oRules_titre","path":"objects/oRules_titre/oRules_titre.yy",},},
+    {"id":{"name":"oSol_boomerangs","path":"objects/oSol_boomerangs/oSol_boomerangs.yy",},},
     {"id":{"name":"oSousa","path":"objects/oSousa/oSousa.yy",},},
     {"id":{"name":"oSuppl_1","path":"objects/oSuppl_1/oSuppl_1.yy",},},
     {"id":{"name":"oTitle_fade","path":"objects/oTitle_fade/oTitle_fade.yy",},},
@@ -173,6 +175,7 @@
     {"id":{"name":"sRules_time","path":"sprites/sRules_time/sRules_time.yy",},},
     {"id":{"name":"sRules_titre","path":"sprites/sRules_titre/sRules_titre.yy",},},
     {"id":{"name":"sRules_vies","path":"sprites/sRules_vies/sRules_vies.yy",},},
+    {"id":{"name":"sSol_projectiles","path":"sprites/sSol_projectiles/sSol_projectiles.yy",},},
     {"id":{"name":"sTitre","path":"sprites/sTitre/sTitre.yy",},},
   ],
   "resourceType":"GMProject",

@@ -16,6 +16,7 @@
     {"name":"inst_22AE1522","path":"rooms/Map_bus/Map_bus.yy",},
     {"name":"inst_5E2C3F5E","path":"rooms/Map_bus/Map_bus.yy",},
     {"name":"inst_71F7B8A4","path":"rooms/Map_bus/Map_bus.yy",},
+    {"name":"inst_5BD5350E","path":"rooms/Map_bus/Map_bus.yy",},
   ],
   "isDnd":false,
   "layers":[
@@ -24,6 +25,7 @@
       ],"layers":[],"name":"Fade","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRInstanceLayer":"","%Name":"Menu","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[
         {"$GMRInstance":"v1","%Name":"inst_71F7B8A4","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_71F7B8A4","objectId":{"name":"oPause","path":"objects/oPause/oPause.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":640.0,"y":-480.0,},
+        {"$GMRInstance":"v1","%Name":"inst_5BD5350E","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"name":"inst_5BD5350E","objectId":{"name":"oSol_boomerangs","path":"objects/oSol_boomerangs/oSol_boomerangs.yy",},"properties":[],"resourceType":"GMRInstance","resourceVersion":"2.0","rotation":0.0,"scaleX":22.000002,"scaleY":0.75,"x":-32.0,"y":296.0,},
       ],"layers":[],"name":"Menu","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
     {"$GMRAssetLayer":"","%Name":"Avant_plan","assets":[
         {"$GMRSpriteGraphic":"","%Name":"graphic_5973E7A2","animationSpeed":1.0,"colour":4294967295,"frozen":false,"headPosition":0.0,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"name":"graphic_5973E7A2","resourceType":"GMRSpriteGraphic","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"spriteId":{"name":"sMap_bus_barriere","path":"sprites/sMap_bus_barriere/sMap_bus_barriere.yy",},"x":0.0,"y":0.0,},

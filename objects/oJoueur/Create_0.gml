@@ -19,14 +19,11 @@ walk_acc = 0.7
 max_walksp = 4
 normal_jumpforce = 8.5
 normal_doublejumpforce = 6.5
-normal_grv = 0.3
 
 sneak_acc = 0.4
-max_sneaksp = 2
+max_sneaksp = 1.5
 sneak_jumpforce = 6
-sneak_grv = 0.5
 
-grv = normal_grv
 sneak_pixel_difference = 24
 still_cooldown_duration = 300
 max_doublejump_amount = 1
@@ -34,6 +31,9 @@ min_doublejump_height = 8
 
 frct = 0.3
 air_frct = 0.05
+normal_grv = 0.3
+key_down_grv = 0.5
+grv = normal_grv
 
 push_force = 1
 facteur_repulsion = 0.1
