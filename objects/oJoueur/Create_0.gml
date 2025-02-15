@@ -1,6 +1,6 @@
-// Initialisation des variables
+// Initialisation des variables 
 
-push_possible = false
+state = "neutral"
 
 hsp = 0
 vsp = 0
@@ -9,13 +9,15 @@ on_ground = true
 doublejump_count = 0
 still_timer = 0
 still = true
+push_possible = false
 
 n_projectile = 0
-mort = false
 
 // Initialisation des réglages
 
-walk_acc = 0.7
+ground_walk_acc = 0.7
+air_walk_acc = 0.25
+walk_acc = ground_walk_acc
 max_walksp = 4
 normal_jumpforce = 8.5
 normal_doublejumpforce = 6.5
@@ -28,9 +30,8 @@ sneak_pixel_difference = 24
 still_cooldown_duration = 300
 max_doublejump_amount = 1
 min_doublejump_height = 8
-
 frct = 0.3
-air_frct = 0.05
+air_frct = 0.04
 normal_grv = 0.3
 key_down_grv = 0.5
 grv = normal_grv
@@ -39,6 +40,8 @@ push_force = 1
 facteur_repulsion = 0.1
 
 // Initialisation des attaques
+
+attack_timer = 0
 
 has_boomerang = false
 
@@ -58,8 +61,7 @@ pv = max_pv
 
 dmg_timer = 0 // Temps écoulé depuis que le joueur a pris des dégâts
 dmg_cooldown = 20 // Durée du temps d'invicibilité après avoir pris des dégâts
-dmg_cooldown_to_can_attack = 20 // Durée pendant laquelle le joueur ne peut pas attaquer après s'être pris des dégâts
-can_attack = false
+dmg_cooldown_to_neutral = 20 // Durée pendant laquelle le joueur ne peut pas attaquer après s'être pris des dégâts
 
 mort = false
 mort_fin = false
@@ -88,6 +90,8 @@ function damage(pv_loss, recul)
 		hsp += recul
 		// Reset le cooldown de dégats
 		dmg_timer = 0
+		// État de dégats
+		state = "damage"
 	}
 	// Mort finale (plus de vies)
 	if global.ruleset_style = "vies" && vies = 0

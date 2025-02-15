@@ -9,7 +9,7 @@ fade_timer = 0
 // Initialisations des personnages
 
 global.player1_char = oGabriel
-global.player2_char = oPotvin
+global.player2_char = oGabriel
 global.player1_hitbox_sprite = sGabriel_hitbox
 global.player2_hitbox_sprite = sPotvin_hitbox
 
@@ -36,3 +36,8 @@ x_char_size = 24
 
 global.x_offscreen_projectile_margin = 64
 global.y_offscreen_projectile_margin = 32
+
+// Animations de double saut
+
+p1_doublejumping = false
+p2_doublejumping = false

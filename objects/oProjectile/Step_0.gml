@@ -31,8 +31,8 @@ if type = "boomerang"
 		
 		// Calcul du vecteur vitesse que l'on veut atteindre
 		dir_to_player = point_direction(x, y, x_targetpos, y_targetpos)
-	    target_hsp = lengthdir_x(vitesse, dir_to_player) * initial_dir
-	    target_vsp = lengthdir_y(vitesse, dir_to_player) * initial_dir
+	    target_hsp = lengthdir_x(vitesse, dir_to_player)
+	    target_vsp = lengthdir_y(vitesse, dir_to_player)
 		
 	    // Accélération nécessaire pour atteindre la vitesse cible dans le temps restant
 	    hsp += (target_hsp - hsp) / remaining_time

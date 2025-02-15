@@ -5,19 +5,19 @@ if choice_cooldown > 0 {choice_cooldown -= 1}
 
 key_gl_cp_ok = keyboard_check_pressed(global.player1_key_action1) || keyboard_check_pressed(global.player2_key_action1)
 key_gl_cp_back = keyboard_check_pressed(global.player1_key_action2) || keyboard_check_pressed(global.player2_key_action2)
-key_gl_cp_up = keyboard_check_pressed(global.player1_key_jump) || keyboard_check_pressed(global.player2_key_jump)
-key_gl_cp_down = keyboard_check_pressed(global.player1_key_sneak) || keyboard_check_pressed(global.player2_key_sneak)
+key_gl_cp_up = keyboard_check_pressed(global.player1_key_up) || keyboard_check_pressed(global.player2_key_up)
+key_gl_cp_down = keyboard_check_pressed(global.player1_key_down) || keyboard_check_pressed(global.player2_key_down)
 key_gl_cp_left = keyboard_check_pressed(global.player1_key_left) || keyboard_check_pressed(global.player2_key_left)
 key_gl_cp_right = keyboard_check_pressed(global.player1_key_right) || keyboard_check_pressed(global.player2_key_right)
 
-key_p1_cp_up = keyboard_check_pressed(global.player1_key_jump)
-key_p1_cp_down = keyboard_check_pressed(global.player1_key_sneak)
+key_p1_cp_ok = keyboard_check_pressed(global.player1_key_action1)
+key_p1_cp_up = keyboard_check_pressed(global.player1_key_up)
+key_p1_cp_down = keyboard_check_pressed(global.player1_key_down)
 key_p1_cp_left = keyboard_check_pressed(global.player1_key_left)
 key_p1_cp_right = keyboard_check_pressed(global.player1_key_right)
-key_p1_cp_ok = keyboard_check_pressed(global.player1_key_action1)
 
-key_p2_cp_up = keyboard_check_pressed(global.player2_key_jump)
-key_p2_cp_down = keyboard_check_pressed(global.player2_key_sneak)
+key_p2_cp_up = keyboard_check_pressed(global.player2_key_up)
+key_p2_cp_down = keyboard_check_pressed(global.player2_key_down)
 key_p2_cp_left = keyboard_check_pressed(global.player2_key_left)
 key_p2_cp_right = keyboard_check_pressed(global.player2_key_right)
 
