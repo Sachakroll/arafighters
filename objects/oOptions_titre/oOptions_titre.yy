@@ -1,9 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"oPaysage_title1",
-  "eventList":[],
+  "%Name":"oOptions_titre",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":64,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"oPaysage_title1",
+  "name":"oOptions_titre",
   "overriddenProperties":[],
   "parent":{
     "name":"Title",
@@ -28,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sPaysage_title1",
-    "path":"sprites/sPaysage_title1/sPaysage_title1.yy",
+    "name":"sOptions_titre",
+    "path":"sprites/sOptions_titre/sOptions_titre.yy",
   },
   "spriteMaskId":null,
   "visible":true,

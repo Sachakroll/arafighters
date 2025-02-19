@@ -3,7 +3,7 @@
   "%Name":"sChar_cadre_Bern",
   "bboxMode":0,
   "bbox_bottom":81,
-  "bbox_left":9,
+  "bbox_left":0,
   "bbox_right":86,
   "bbox_top":4,
   "collisionKind":1,

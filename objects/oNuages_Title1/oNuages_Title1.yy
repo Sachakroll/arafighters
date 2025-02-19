@@ -1,9 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"oNuages_Title1",
+  "%Name":"oNuages_title1",
   "eventList":[],
   "managed":true,
-  "name":"oNuages_Title1",
+  "name":"oNuages_title1",
   "overriddenProperties":[],
   "parent":{
     "name":"Title",
@@ -28,8 +28,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sNuages_Title1",
-    "path":"sprites/sNuages_Title1/sNuages_Title1.yy",
+    "name":"sNuages_title1",
+    "path":"sprites/sNuages_title1/sNuages_title1.yy",
   },
   "spriteMaskId":null,
   "visible":true,

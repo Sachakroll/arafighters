@@ -2,7 +2,7 @@ if global.pause = 0 {
 
 // Récupération des touches pressées
 
-if !mort && !mort_fin
+if !mort && !mort_fin && state != "damage"
 {
 	if player = 1
 	{
@@ -129,9 +129,9 @@ if place_meeting(x+hsp, y, adv_inst)
 	}
 	if place_meeting(x+hsp, y, adv_inst)
 	{
-		while !place_meeting(x+sign(hsp), y, adv_inst)
+		while !place_meeting(x + sign(hsp)*collision_step, y, adv_inst)
 		{
-			x = x + sign(hsp)
+			x = x + sign(hsp) * collision_step
 		}
 		hsp = 0
 	}
@@ -139,9 +139,9 @@ if place_meeting(x+hsp, y, adv_inst)
 
 if place_meeting(x, y+vsp, adv_inst)
 {
-	while !place_meeting(x, y+sign(vsp), adv_inst)
+	while !place_meeting(x, y + sign(vsp)*collision_step, adv_inst)
 	{
-		y = y + sign(vsp)
+		y = y + sign(vsp) * collision_step
 	}
 	vsp = 0
 	//hsp -= sign(adv_inst.x-x)*facteur_repulsion
@@ -154,18 +154,18 @@ if place_meeting(x, y, adv_inst)
 
 if place_meeting(x+hsp, y, oCollision)
 {
-	while !place_meeting(x+sign(hsp), y, oCollision) && !place_meeting(x, y, oCollision)
+	while !place_meeting(x + sign(hsp)*collision_step, y, oCollision) && !place_meeting(x, y, oCollision)
 	{
-		x = x + sign(hsp)
+		x = x + sign(hsp) * collision_step
 	}
 	hsp = 0
 }
 
 if place_meeting(x, y+vsp, oCollision)
 {
-	while !place_meeting(x, y+sign(vsp), oCollision) && !place_meeting(x, y, oCollision)
+	while !place_meeting(x, y + sign(vsp)*collision_step, oCollision) && !place_meeting(x, y, oCollision)
 	{
-		y = y + sign(vsp)
+		y = y + sign(vsp) * collision_step
 	}
 	vsp = 0
 }
@@ -181,9 +181,9 @@ if place_meeting(x, y, adv_inst)
 
 if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && (!key_down || state = "boomerang")
 {
-	while !place_meeting(x, y+sign(vsp), oPlateforme) && !place_meeting(x, y, oPlateforme)
+	while !place_meeting(x, y + sign(vsp)*collision_step, oPlateforme)
 	{
-		y = y + sign(vsp)
+		y = y + sign(vsp) * collision_step
 	}
 	vsp = 0
 }
@@ -192,6 +192,8 @@ if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlat
 
 x = x + hsp
 y = y + vsp
+
+if on_ground {y = round(y)}
 
 // Etablir la direction du personnage
 
@@ -256,8 +258,8 @@ attack_timer ++
 if has_boomerang
 {
 	n_boomerang = projectile_nb_check(oProjectile, sGab_boomerang, id)
-
-	if key_action_1 && (key_left || key_right || hsp != 0) && state = "neutral" && n_boomerang < n_max_boomerang
+	
+	if key_action_2 && (key_left || key_right || hsp != 0) && state = "neutral" && n_boomerang < n_max_boomerang
 	{
 		state = "boomerang"
 		attack_timer = 0

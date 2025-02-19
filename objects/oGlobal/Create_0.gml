@@ -5,6 +5,11 @@ fullscreen = false
 global.ruleset_time = 5
 global.ruleset_vies = 1
 
+// Son
+
+global.volume = 1
+global.music = -1
+
 // Contrôles par défaut
 
 // Joueur 1

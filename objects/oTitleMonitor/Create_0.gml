@@ -22,6 +22,9 @@ global.map = Map_bus
 selected_rules = 1
 global.ruleset_style = "vies"
 
+selected_options = 0
+alternating_bit = 0
+
 load_time = 120
 goto_delay = 30
 load_timer = 0

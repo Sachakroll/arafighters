@@ -13,11 +13,11 @@ if oTitleMonitor.selected_choice = 1
 	image_index = 0
 }
 
-if oTitleMonitor.state = "title to choice" || oTitleMonitor.state = "char to choice" || oTitleMonitor = "options to choice"
+if oTitleMonitor.state = "title to choice" || oTitleMonitor.state = "char to choice" || oTitleMonitor.state = "options to choice"
 {
 	image_alpha += 1/oTitleMonitor.anim1_dur
 }
-if oTitleMonitor.state = "choice to title" || oTitleMonitor.state = "choice to char" || oTitleMonitor = "choice to options"
+if oTitleMonitor.state = "choice to title" || oTitleMonitor.state = "choice to char" || oTitleMonitor.state = "choice to options"
 {
 	image_alpha -= 1/oTitleMonitor.anim1_dur
 }

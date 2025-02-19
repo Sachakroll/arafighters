@@ -38,6 +38,7 @@ grv = normal_grv
 
 push_force = 1
 facteur_repulsion = 0.1
+collision_step = 0.1
 
 // Initialisation des attaques
 

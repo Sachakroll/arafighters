@@ -1,6 +1,8 @@
 if timer != -1 {timer += 1}
 if choice_cooldown > 0 {choice_cooldown -= 1}
 
+alternating_bit = 1 - alternating_bit
+
 // Touches du clavier
 
 key_gl_cp_ok = keyboard_check_pressed(global.player1_key_action1) || keyboard_check_pressed(global.player2_key_action1)
@@ -15,6 +17,8 @@ key_p1_cp_up = keyboard_check_pressed(global.player1_key_up)
 key_p1_cp_down = keyboard_check_pressed(global.player1_key_down)
 key_p1_cp_left = keyboard_check_pressed(global.player1_key_left)
 key_p1_cp_right = keyboard_check_pressed(global.player1_key_right)
+key_p1_c_left = keyboard_check(global.player1_key_left)
+key_p1_c_right = keyboard_check(global.player1_key_right)
 
 key_p2_cp_up = keyboard_check_pressed(global.player2_key_up)
 key_p2_cp_down = keyboard_check_pressed(global.player2_key_down)
@@ -77,11 +81,72 @@ if state = "choice"
 			state = "choice to char"
 			timer = 0
 		}
+		if selected_choice = 3
+		{
+			state = "choice to options"
+			timer = 0
+		}
 		if selected_choice = 4
 		{
 			game_end()
 		}
 	}
+}
+
+if state = "choice to options"
+{
+	selected_options = 0
+	oTitre.y_center -= titleheight/anim1_dur
+	if timer = anim1_dur
+	{
+		timer = -1
+		state = "options"
+	}
+}
+if state = "options to choice"
+{
+	oTitre.y_center += titleheight/anim1_dur
+	if timer = anim1_dur
+	{
+		timer = -1
+		state = "choice"
+		oTitre.y_center = title_titre_y_position
+	}
+}
+
+if state = "options"
+{
+	if key_gl_cp_back
+	{
+		state = "options to choice"
+		timer = 0
+	}
+	if selected_options = 0
+	{
+		if key_p1_cp_left || key_p1_cp_right {alternating_bit = 1}
+		if key_p1_c_left && global.volume > 0 && alternating_bit = 1
+		{
+			global.volume -= 0.01
+		}
+		if key_p1_c_right && global.volume < 1 && alternating_bit = 1
+		{
+			global.volume += 0.01
+		}
+		if key_p1_cp_ok
+		{
+			if global.volume > 0 {global.volume = 0}
+			else {global.volume = 1}
+		}
+		if key_p1_cp_down
+		{
+			selected_options = 1
+		}
+	}
+	if key_p1_cp_up && selected_options = 1
+	{
+		selected_options = 0
+	}
+	global.volume = round(100*global.volume)/100
 }
 
 if state = "choice to char"
@@ -534,5 +599,4 @@ if state = "load"
 	oLogo.y_center -= load_logo_movement/load_time
 }
 
-show_debug_message("selected_map = "+selected_map)
 show_debug_message("state = "+state)
