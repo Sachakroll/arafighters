@@ -43,8 +43,11 @@ else {move = 0}
 
 // Est-ce que le joueur est sur le sol
 
+time_since_on_ground ++
+
 if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && (!key_down || state = "boomerang"))
-     {on_ground = true}
+     {on_ground = true
+	  time_since_on_ground = 0}
 else {on_ground = false}
 
 // Sneak on/off
@@ -94,14 +97,16 @@ vsp = vsp + grv
 
 // Saut
 
-if on_ground {doublejump_count = 0}
+if on_ground {doublejump_count = 0
+			  has_jumped = false}
 
-if on_ground && key_jump && state = "neutral"
+if (on_ground || (time_since_on_ground <= jump_cheat_time && vsp >= 0 && !has_jumped)) && key_jump && state = "neutral"
 {
 	if sneak || key_down {vsp = -sneak_jumpforce}
 	else {vsp = -normal_jumpforce}
+	has_jumped = true
 }
-if !on_ground && vsp > 0 && doublejump_count < max_doublejump_amount && !place_meeting(x, y+min_doublejump_height, oCollision) && key_jump && !key_down && !sneak && state = "neutral"
+else if !on_ground && vsp > 0 && doublejump_count < max_doublejump_amount && !place_meeting(x, y+min_doublejump_height, oCollision) && key_jump && !key_down && !sneak && state = "neutral"
 {
 	vsp = -normal_doublejumpforce
 	doublejump_count += 1
@@ -244,7 +249,7 @@ for (var i = 0; i < array_length(collisions); i++)
 	
 	if projectile.type = "boomerang" && projectile.actif = true
 	{
-		damage(projectile.degats, 0)
+		damage(projectile.degats, projectile.h_knockback, projectile.v_knockback)
 		projectile.actif = false
 	}
 }
@@ -308,7 +313,9 @@ if state = "boomerang" && attack_timer = boomerang_attack_timer
 		portee : boomerang_portee + added_portee,
 		vitesse : boomerang_sp + added_speed,
 		temps_acc_retour : boomerang_comeback_acc_time,
-		degats : boomerang_dmg
+		degats : boomerang_dmg,
+		h_knockback : 0,
+		v_knockback : 0
 	})
 }
 

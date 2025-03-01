@@ -82,6 +82,7 @@
     {"id":{"name":"oMap_bus_panneau","path":"objects/oMap_bus_panneau/oMap_bus_panneau.yy",},},
     {"id":{"name":"oMap_bus","path":"objects/oMap_bus/oMap_bus.yy",},},
     {"id":{"name":"oMap_choix","path":"objects/oMap_choix/oMap_choix.yy",},},
+    {"id":{"name":"oMap_cour","path":"objects/oMap_cour/oMap_cour.yy",},},
     {"id":{"name":"oMap_titre","path":"objects/oMap_titre/oMap_titre.yy",},},
     {"id":{"name":"oMouvet","path":"objects/oMouvet/oMouvet.yy",},},
     {"id":{"name":"oNuages_title1","path":"objects/oNuages_title1/oNuages_title1.yy",},},
@@ -104,6 +105,7 @@
     {"id":{"name":"oTitleMonitor","path":"objects/oTitleMonitor/oTitleMonitor.yy",},},
     {"id":{"name":"oTitre","path":"objects/oTitre/oTitre.yy",},},
     {"id":{"name":"Map_bus","path":"rooms/Map_bus/Map_bus.yy",},},
+    {"id":{"name":"Map_cour","path":"rooms/Map_cour/Map_cour.yy",},},
     {"id":{"name":"Title","path":"rooms/Title/Title.yy",},},
     {"id":{"name":"Count_instances","path":"scripts/Count_instances/Count_instances.yy",},},
     {"id":{"name":"Sound1","path":"sounds/Sound1/Sound1.yy",},},
@@ -153,6 +155,7 @@
     {"id":{"name":"sMap_bus_panneau","path":"sprites/sMap_bus_panneau/sMap_bus_panneau.yy",},},
     {"id":{"name":"sMap_bus","path":"sprites/sMap_bus/sMap_bus.yy",},},
     {"id":{"name":"sMap_choix","path":"sprites/sMap_choix/sMap_choix.yy",},},
+    {"id":{"name":"sMap_cour","path":"sprites/sMap_cour/sMap_cour.yy",},},
     {"id":{"name":"sMap_titre","path":"sprites/sMap_titre/sMap_titre.yy",},},
     {"id":{"name":"sMoniteurCombat","path":"sprites/sMoniteurCombat/sMoniteurCombat.yy",},},
     {"id":{"name":"sMoniteurGlobal","path":"sprites/sMoniteurGlobal/sMoniteurGlobal.yy",},},
@@ -187,6 +190,7 @@
   "RoomOrderNodes":[
     {"roomId":{"name":"Title","path":"rooms/Title/Title.yy",},},
     {"roomId":{"name":"Map_bus","path":"rooms/Map_bus/Map_bus.yy",},},
+    {"roomId":{"name":"Map_cour","path":"rooms/Map_cour/Map_cour.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

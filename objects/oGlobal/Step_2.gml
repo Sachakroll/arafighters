@@ -3,7 +3,7 @@
 if keyboard_check_pressed(vk_f1)
 {
 	if room = Title
-	{room_goto(Map_bus)}
+	{room_goto(global.map)}
 	else{room_goto(Title)}
 }
 

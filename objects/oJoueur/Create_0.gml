@@ -6,6 +6,8 @@ hsp = 0
 vsp = 0
 sneak = false
 on_ground = true
+has_jumped = false
+time_since_on_ground = 0
 doublejump_count = 0
 still_timer = 0
 still = true
@@ -21,6 +23,7 @@ walk_acc = ground_walk_acc
 max_walksp = 4
 normal_jumpforce = 8.5
 normal_doublejumpforce = 6.5
+jump_cheat_time = 4
 
 sneak_acc = 0.4
 max_sneaksp = 1.5
@@ -31,7 +34,7 @@ still_cooldown_duration = 300
 max_doublejump_amount = 1
 min_doublejump_height = 8
 frct = 0.3
-air_frct = 0.04
+air_frct = 0.025
 normal_grv = 0.3
 key_down_grv = 0.5
 grv = normal_grv
@@ -72,7 +75,7 @@ resurrect_cooldown = 60
 
 // Fonction dégats
 
-function damage(pv_loss, recul)
+function damage(pv_loss, h_knockback, v_knockback)
 {
 	if dmg_timer >= dmg_cooldown && !mort_fin && !mort
 	{
@@ -88,7 +91,8 @@ function damage(pv_loss, recul)
 			resurrect_timer = 0
 		}
 		// Recul
-		hsp += recul
+		hsp += h_knockback
+		vsp += v_knockback
 		// Reset le cooldown de dégats
 		dmg_timer = 0
 		// État de dégats

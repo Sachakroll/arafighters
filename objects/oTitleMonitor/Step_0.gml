@@ -569,7 +569,7 @@ if state = "load"
 	load_timer += 1
 	if load_timer = load_time + goto_delay
 	{
-		//Chargement
+		// Chargement
 		
 		if p1_selected_char = 1 {global.player1_char = oGabriel}
 		if p2_selected_char = 1 {global.player2_char = oGabriel}
@@ -592,7 +592,14 @@ if state = "load"
 		if p1_selected_char = 10 {global.player1_char = oBurniat}
 		if p2_selected_char = 10 {global.player2_char = oBurniat}
 		
-		//Début du combat
+		if selected_map = "cour" {global.map = Map_cour}
+		if selected_map = "rot" {global.map = Map_cour}
+		if selected_map = "stud" {global.map = Map_cour}
+		if selected_map = "jard" {global.map = Map_cour}
+		if selected_map = "l38" {global.map = Map_cour}
+		if selected_map = "bus" {global.map = Map_bus}
+		
+		// Début du combat
 		
 		room_goto(global.map)
 	}

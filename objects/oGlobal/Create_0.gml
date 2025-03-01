@@ -5,6 +5,8 @@ fullscreen = false
 global.ruleset_time = 5
 global.ruleset_vies = 1
 
+global.map = Map_bus
+
 // Son
 
 global.volume = 1
