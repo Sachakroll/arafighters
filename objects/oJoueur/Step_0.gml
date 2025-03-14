@@ -45,7 +45,7 @@ else {move = 0}
 
 time_since_on_ground ++
 
-if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && (!key_down || state = "boomerang"))
+if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && (!key_down || state = "boomerang")) || place_meeting(x, y+1, adv_inst)
      {on_ground = true
 	  time_since_on_ground = 0}
 else {on_ground = false}
@@ -120,17 +120,8 @@ if place_meeting(x+hsp, y, adv_inst)
 {
 	if (key_left && x>adv_inst.x) || (key_right && x<adv_inst.x)
 	{
-		with adv_inst
-		{
-			if !place_meeting(x+other.hsp*other.push_force/push_force, y, oCollision)
-			{other.push_possible = 1}
-			else {other.push_possible = 0}
-		}
-		if push_possible = 1
-		{
-			hsp = hsp*push_force/adv_inst.push_force/2
-			adv_inst.x += hsp
-		}
+		hsp = dir*push_force/adv_inst.push_force
+		adv_inst.pushed_force += hsp
 	}
 	if place_meeting(x+hsp, y, adv_inst)
 	{
@@ -141,6 +132,8 @@ if place_meeting(x+hsp, y, adv_inst)
 		hsp = 0
 	}
 }
+
+hsp += pushed_force
 
 if place_meeting(x, y+vsp, adv_inst)
 {
@@ -197,6 +190,9 @@ if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlat
 
 x = x + hsp
 y = y + vsp
+
+hsp -= pushed_force
+pushed_force = 0
 
 if on_ground {y = round(y)}
 

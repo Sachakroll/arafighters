@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"Cadre_pos",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Cadre_pos",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

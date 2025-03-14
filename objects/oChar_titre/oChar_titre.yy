@@ -9,8 +9,8 @@
   "name":"oChar_titre",
   "overriddenProperties":[],
   "parent":{
-    "name":"Character_select",
-    "path":"folders/Objets/Title/Character_select.yy",
+    "name":"Title",
+    "path":"folders/Objets/Title.yy",
   },
   "parentObjectId":null,
   "persistent":false,

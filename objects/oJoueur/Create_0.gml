@@ -9,9 +9,9 @@ on_ground = true
 has_jumped = false
 time_since_on_ground = 0
 doublejump_count = 0
+pushed_force = 0
 still_timer = 0
 still = true
-push_possible = false
 
 n_projectile = 0
 
@@ -65,7 +65,7 @@ pv = max_pv
 
 dmg_timer = 0 // Temps écoulé depuis que le joueur a pris des dégâts
 dmg_cooldown = 20 // Durée du temps d'invicibilité après avoir pris des dégâts
-dmg_cooldown_to_neutral = 20 // Durée pendant laquelle le joueur ne peut pas attaquer après s'être pris des dégâts
+dmg_cooldown_to_neutral = 20 // Durée pendant laquelle le joueur ne peut pas bouger après s'être pris des dégâts
 
 mort = false
 mort_fin = false
