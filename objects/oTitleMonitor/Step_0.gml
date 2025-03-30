@@ -11,6 +11,8 @@ key_gl_cp_up = keyboard_check_pressed(global.player1_key_up) || keyboard_check_p
 key_gl_cp_down = keyboard_check_pressed(global.player1_key_down) || keyboard_check_pressed(global.player2_key_down)
 key_gl_cp_left = keyboard_check_pressed(global.player1_key_left) || keyboard_check_pressed(global.player2_key_left)
 key_gl_cp_right = keyboard_check_pressed(global.player1_key_right) || keyboard_check_pressed(global.player2_key_right)
+key_gl_c_left = keyboard_check(global.player1_key_left) || keyboard_check(global.player2_key_left)
+key_gl_c_right = keyboard_check(global.player1_key_right) || keyboard_check(global.player2_key_right)
 
 key_p1_cp_ok = keyboard_check_pressed(global.player1_key_action1)
 key_p1_cp_up = keyboard_check_pressed(global.player1_key_up)
@@ -123,28 +125,59 @@ if state = "options"
 	}
 	if selected_options = 0
 	{
-		if key_p1_cp_left || key_p1_cp_right {alternating_bit = 1}
-		if key_p1_c_left && global.volume > 0 && alternating_bit = 1
+		if key_gl_cp_left || key_gl_cp_right {alternating_bit = 1}
+		if key_gl_c_left && global.volume > 0 && alternating_bit = 1
 		{
 			global.volume -= 0.01
 		}
-		if key_p1_c_right && global.volume < 1 && alternating_bit = 1
+		if key_gl_c_right && global.volume < 1 && alternating_bit = 1
 		{
 			global.volume += 0.01
 		}
-		if key_p1_cp_ok
+		if key_gl_cp_ok
 		{
 			if global.volume > 0 {global.volume = 0}
 			else {global.volume = 1}
 		}
-		if key_p1_cp_down
+		if key_gl_cp_down
 		{
 			selected_options = 1
 		}
 	}
-	if key_p1_cp_up && selected_options = 1
+	if selected_options = 1
+	{
+		if key_gl_cp_up
+		{
+			selected_options = 0
+		}
+		if key_gl_cp_left && global.p1_controller != -1
+		{
+			selected_options = 1.1
+		}
+		if key_gl_cp_right && global.p2_controller != -1
+		{
+			selected_options = 1.2
+		}
+	}
+	if (selected_options = 1.1 || selected_options = 1.2) && selected_controls = 0 && key_gl_cp_up
 	{
 		selected_options = 0
+	}
+	if selected_options = 1.1
+	{
+		if key_gl_cp_right || global.p1_controller = -1 {selected_options = 1}
+		if key_gl_cp_down && selected_controls < selectable_controls_max
+		{selected_controls ++}
+		if key_gl_cp_up && selected_controls > 0
+		{selected_controls --}
+	}
+	if selected_options = 1.2
+	{
+		if key_gl_cp_left || global.p2_controller = -1 {selected_options = 1}
+		if key_gl_cp_down && selected_controls < selectable_controls_max
+		{selected_controls ++}
+		if key_gl_cp_up && selected_controls > 0
+		{selected_controls --}
 	}
 	global.volume = round(100*global.volume)/100
 }
@@ -605,5 +638,3 @@ if state = "load"
 	}
 	oLogo.y_center -= load_logo_movement/load_time
 }
-
-show_debug_message("state = "+state)

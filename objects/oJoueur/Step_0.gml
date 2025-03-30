@@ -4,7 +4,7 @@ if global.pause = 0 {
 
 if !mort && !mort_fin && state != "damage"
 {
-	if player = 1
+	if player = 1 && global.p1_controller = -1
 	{
 		key_left = keyboard_check(global.player1_key_left)
 		key_right = keyboard_check(global.player1_key_right)
@@ -13,6 +13,10 @@ if !mort && !mort_fin && state != "damage"
 		key_down = keyboard_check(global.player1_key_down)
 		key_action_1 = keyboard_check_pressed(global.player1_key_action1)
 		key_action_2 = keyboard_check_pressed(global.player1_key_action2)
+		key_action_1_hold = keyboard_check(global.player1_key_action1)
+		key_action_2_hold = keyboard_check(global.player1_key_action2)
+		key_action_1_end = keyboard_check_released(global.player1_key_action1)
+		key_action_2_end = keyboard_check_released(global.player1_key_action2)
 	}
 	if player = 2
 	{
@@ -23,17 +27,51 @@ if !mort && !mort_fin && state != "damage"
 		key_down = keyboard_check(global.player2_key_down)
 		key_action_1 = keyboard_check_pressed(global.player2_key_action1)
 		key_action_2 = keyboard_check_pressed(global.player2_key_action2)
+		key_action_1_hold = keyboard_check(global.player2_key_action1)
+		key_action_2_hold = keyboard_check(global.player2_key_action2)
+		key_action_1_end = keyboard_check_released(global.player2_key_action1)
+		key_action_2_end = keyboard_check_released(global.player2_key_action2)
+	}
+	if player = 1 && global.p1_controller != -1
+	{
+		var prev_key_up = key_up
+		var gp_move_x = gamepad_axis_value(global.p1_controller, global.p1_gp_x_axis)
+		var gp_move_y = gamepad_axis_value(global.p1_controller, global.p1_gp_y_axis)
+		key_left = gp_move_x < -global.gp_deadzone
+		key_right = gp_move_x > global.gp_deadzone
+		key_up = gp_move_y < -global.gp_deadzone
+		key_down = gp_move_y > global.gp_deadzone
+		key_jump = key_up && !prev_key_up
+		key_action_1 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action1)
+		key_action_2 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action2)
+	}
+	if player = 2 && global.p2_controller != -1
+	{
+		var prev_key_up = key_up
+		var gp_move_x = gamepad_axis_value(global.p2_controller, global.p2_gp_x_axis)
+		var gp_move_y = gamepad_axis_value(global.p2_controller, global.p2_gp_y_axis)
+		key_left = gp_move_x < -global.gp_deadzone
+		key_right = gp_move_x > global.gp_deadzone
+		key_up = gp_move_y < -global.gp_deadzone
+		key_down = gp_move_y > global.gp_deadzone
+		key_jump = key_up && !prev_key_up
+		key_action_1 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action1)
+		key_action_2 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action2)
 	}
 }
-else 
+else
 {
-	key_left = false
-	key_right = false
-	key_jump = false
-	key_up = false
-	key_down = false
-	key_action_1 = false
-	key_action_2 = false
+	key_left = 0
+	key_right = 0
+	key_jump = 0
+	key_up = 0
+	key_down = 0
+	key_action_1 = 0
+	key_action_2 = 0
+	key_action_1_hold = 0
+	key_action_2_hold = 0
+	key_action_1_end = 0
+	key_action_2_end = 0
 }
 
 // Mouvement
@@ -45,7 +83,7 @@ else {move = 0}
 
 time_since_on_ground ++
 
-if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && (!key_down || state = "boomerang")) || place_meeting(x, y+1, adv_inst)
+if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && (!key_down || (state = "spe_side" && has_boomerang))) || place_meeting(x, y+1, adv_inst)
      {on_ground = true
 	  time_since_on_ground = 0}
 else {on_ground = false}
@@ -59,17 +97,20 @@ else if !place_meeting(x, y-sneak_pixel_difference, oCollision)
 
 // Vitesse et déplacement en sneak / pas en sneak
 
-if on_ground {walk_acc = ground_walk_acc}
-else {walk_acc = air_walk_acc}
+if state = "neutral"
+{
+	if on_ground {walk_acc = ground_walk_acc}
+	else {walk_acc = air_walk_acc}
 
-if sneak {if abs(hsp+(move*sneak_acc)) <= max_sneaksp || (!on_ground && abs(hsp+(move*walk_acc)) <= max_walksp)
-	{hsp += move * sneak_acc}
-	else {if on_ground {hsp = max_sneaksp * sign(hsp)}
-		  else {hsp = max_walksp * sign(hsp)}}}
+	if sneak {if abs(hsp+(move*sneak_acc)) <= max_sneaksp || (!on_ground && abs(hsp+(move*walk_acc)) <= max_walksp)
+		{hsp += move * sneak_acc}
+		else {if on_ground {hsp = max_sneaksp * sign(hsp)}
+			  else {hsp = max_walksp * sign(hsp)}}}
 
-if !sneak {if abs(hsp+(move*walk_acc)) <= max_walksp
-	{hsp += move * walk_acc}
-	else {hsp = max_walksp * sign(hsp)}}
+	if !sneak {if abs(hsp+(move*walk_acc)) <= max_walksp
+		{hsp += move * walk_acc}
+		else {hsp = max_walksp * sign(hsp)}}
+}
 
 // Gravité
 
@@ -177,7 +218,7 @@ if place_meeting(x, y, adv_inst)
 
 // Collisions avec les plateformes
 
-if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && (!key_down || state = "boomerang")
+if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && (!key_down || state = "spe_side")
 {
 	while !place_meeting(x, y + sign(vsp)*collision_step, oPlateforme)
 	{
@@ -213,11 +254,9 @@ if still_timer >= still_cooldown_duration {still = true}
 
 // Dégats et capacité d'attaquer
 
-dmg_timer ++
-if dmg_timer = dmg_cooldown_to_neutral
-{state = "neutral"}
-if dmg_timer < dmg_cooldown_to_neutral
-{state = "damage"}
+if dmg_timer = 0 && state = "damage" {state = "neutral"}
+if dmg_timer > 0 {state = "damage"
+	dmg_timer --}
 
 // Résurrection
 
@@ -245,7 +284,7 @@ for (var i = 0; i < array_length(collisions); i++)
 	
 	if projectile.type = "boomerang" && projectile.actif = true
 	{
-		damage(projectile.degats, projectile.h_knockback, projectile.v_knockback)
+		damage(projectile.degats, projectile.dmg_duration, projectile.h_knockback*sign(x-projectile.x), projectile.v_knockback)
 		projectile.actif = false
 	}
 }
@@ -254,65 +293,70 @@ for (var i = 0; i < array_length(collisions); i++)
 
 attack_timer ++
 
+if is_string(atk()) {show_debug_message("p"+string(player)+" "+atk())} // Debug
+
 // Attaque boomerang
 
 if has_boomerang
 {
 	n_boomerang = projectile_nb_check(oProjectile, sGab_boomerang, id)
 	
-	if key_action_2 && (key_left || key_right || hsp != 0) && state = "neutral" && n_boomerang < n_max_boomerang
+	if atk() = "spe_side" && n_boomerang < n_max_boomerang
 	{
-		state = "boomerang"
+		state = "spe_side"
 		attack_timer = 0
 		if dir = 1 {angle = 0}
 		if dir = -1 {angle = pi}
 	}
+
+	if state = "spe_side" && attack_timer <= boomerang_startup_time && (key_up || key_down)
+	{
+		if dir = 1
+		{
+			if key_up {angle = boomerang_angle}
+			if key_down {angle = -boomerang_angle}
+		}
+		if dir = -1
+		{
+			if key_up {angle = pi-boomerang_angle}
+			if key_down {angle = pi+boomerang_angle}
+		}
+	}
+
+	if state = "spe_side" && attack_timer = boomerang_recovery_time && state != "damage"
+	{state = "neutral"}
+
+	if state = "spe_side" && attack_timer = boomerang_startup_time
+	{
+		if move = sign(hsp)
+		{
+			added_speed = abs(hsp)
+			added_portee = boomerang_coefficient_portee_bonus * abs(hsp)
+		}
+		else
+		{
+			added_speed = 0
+			added_portee = 0
+		}
+		instance_create_layer(x, y-hand_height, "Player", oProjectile,
+		{
+			type : "boomerang",
+			expediteur: id,
+			friendly_fire : false,
+			sprite_index: boomerang_sprite,
+			rotation_sp : boomerang_rotation_sp,
+			angle : angle,
+			portee : boomerang_portee + added_portee,
+			vitesse : boomerang_sp + added_speed,
+			temps_acc_retour : boomerang_comeback_acc_time,
+			degats : boomerang_dmg,
+			dmg_duration : boomerang_dmg_duration,
+			h_knockback : boomerang_h_knockback,
+			v_knockback : boomerang_v_knockback
+		})
+	}
 }
 
-if state = "boomerang" && attack_timer <= boomerang_attack_timer && (key_up || key_down)
-{
-	if dir = 1
-	{
-		if key_up {angle = boomerang_angle}
-		if key_down {angle = -boomerang_angle}
-	}
-	if dir = -1
-	{
-		if key_up {angle = pi-boomerang_angle}
-		if key_down {angle = pi+boomerang_angle}
-	}
-}
 
-if state = "boomerang" && attack_timer = boomerang_move_timer && state != "damage"
-{state = "neutral"}
-
-if state = "boomerang" && attack_timer = boomerang_attack_timer
-{
-	if move = sign(hsp)
-	{
-		added_speed = abs(hsp)
-		added_portee = boomerang_coefficient_portee_bonus * abs(hsp)
-	}
-	else
-	{
-		added_speed = 0
-		added_portee = 0
-	}
-	instance_create_layer(x, y-hand_height, "Player", oProjectile,
-	{
-		type : "boomerang",
-		expediteur: id,
-		friendly_fire : false,
-		sprite_index: boomerang_sprite,
-		rotation_sp : boomerang_rotation_sp,
-		angle : angle,
-		portee : boomerang_portee + added_portee,
-		vitesse : boomerang_sp + added_speed,
-		temps_acc_retour : boomerang_comeback_acc_time,
-		degats : boomerang_dmg,
-		h_knockback : 0,
-		v_knockback : 0
-	})
-}
 
 }

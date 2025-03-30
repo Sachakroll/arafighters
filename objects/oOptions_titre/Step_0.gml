@@ -29,4 +29,5 @@ if oTitleMonitor.state = "choice"
 }
 
 if oTitleMonitor.selected_options = 0 {image_index = 0}
-else {image_index = 1}
+else if oTitleMonitor.selected_options = 1 {image_index = 1}
+else {image_index = 2}

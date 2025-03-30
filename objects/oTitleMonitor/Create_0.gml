@@ -27,6 +27,8 @@ selected_rules = 1
 global.ruleset_style = "vies"
 
 selected_options = 0
+selected_controls = 0
+selectable_controls_max = 3
 alternating_bit = 0
 
 load_time = 120

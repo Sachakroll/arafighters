@@ -26,7 +26,7 @@ normal_doublejumpforce = 6.5
 jump_cheat_time = 4
 
 sneak_acc = 0.4
-max_sneaksp = 1.5
+max_sneaksp = 1.5 // doit être plus petit que min_sideatk_speed et que min_dash_speed
 sneak_jumpforce = 6
 
 sneak_pixel_difference = 24
@@ -47,6 +47,11 @@ collision_step = 0.1
 
 attack_timer = 0
 
+min_sideatk_speed = 1.6 // doit être plus grand que max_sneaksp
+min_dash_speed = 3.7 // doit être plus grand que max_sneaksp
+atk_charge = 0
+min_atk_charge = 10
+
 has_boomerang = false
 
 // Initialisation de la vie et du timer
@@ -63,9 +68,7 @@ if global.ruleset_style = "temps"
 max_pv = 100
 pv = max_pv
 
-dmg_timer = 0 // Temps écoulé depuis que le joueur a pris des dégâts
-dmg_cooldown = 20 // Durée du temps d'invicibilité après avoir pris des dégâts
-dmg_cooldown_to_neutral = 20 // Durée pendant laquelle le joueur ne peut pas bouger après s'être pris des dégâts
+dmg_timer = 0
 
 mort = false
 mort_fin = false
@@ -75,9 +78,9 @@ resurrect_cooldown = 60
 
 // Fonction dégats
 
-function damage(pv_loss, h_knockback, v_knockback)
+function damage(pv_loss, dmg_duration, h_knockback, v_knockback)
 {
-	if dmg_timer >= dmg_cooldown && !mort_fin && !mort
+	if dmg_timer = 0 && !mort_fin && !mort
 	{
 		// Dégats si on ne meurt pas
 		if pv-pv_loss > 0
@@ -94,7 +97,7 @@ function damage(pv_loss, h_knockback, v_knockback)
 		hsp += h_knockback
 		vsp += v_knockback
 		// Reset le cooldown de dégats
-		dmg_timer = 0
+		dmg_timer = dmg_duration
 		// État de dégats
 		state = "damage"
 	}
@@ -105,6 +108,55 @@ function damage(pv_loss, h_knockback, v_knockback)
 	}
 }
 
+// Fonction attaque
+
+function atk()
+{	
+	if state = "neutral"
+	{
+		if key_action_2
+		{
+			if key_up
+			{return "spe_up"}
+			else if key_down
+			{return "spe down"}
+			else if key_left || key_right || abs(hsp) >= min_sideatk_speed
+			{return "spe_side"}
+			else {return "spe_b"}
+		}
+		if key_action_1
+		{
+			if key_up && !key_left && !key_right
+			{return "atk_up"}
+			else if key_down && !on_ground
+			{return "atk_downair"}
+			else if (key_left || key_right) && !on_ground && abs(hsp) >= min_sideatk_speed
+			{return "atk_sideair"}
+			else if on_ground && abs(hsp) >= min_dash_speed
+			{return "atk_dash"}
+			else
+			{
+				if sneak {return "atk_sneak"}
+				else {return "atk_b"}
+			}
+		}
+	}
+}
+
 // Création du oPointeur_joueur
 
 instance_create_layer(x, y, "Player", oPointeur_joueur, {owner : id})
+
+// Initialisation des touches
+
+key_left = 0
+key_right = 0
+key_jump = 0
+key_up = 0
+key_down = 0
+key_action_1 = 0
+key_action_2 = 0
+key_action_1_hold = 0
+key_action_2_hold = 0
+key_action_1_end = 0
+key_action_2_end = 0
