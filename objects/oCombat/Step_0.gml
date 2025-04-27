@@ -22,9 +22,9 @@ if global.ruleset_style = "temps" && global.pause = 0
 
 // Pause
 
-if keyboard_check_pressed(global.player1_key_pause) && global.pause != 2
+if (keyboard_check_pressed(global.player1_key_pause) || gamepad_button_check_pressed(global.p1_controller, global.p1_gp_pause)) && global.pause != 2
 {global.pause = 1-global.pause}
-if keyboard_check_pressed(global.player2_key_pause) && global.pause != 1
+if (keyboard_check_pressed(global.player2_key_pause) || gamepad_button_check_pressed(global.p2_controller, global.p2_gp_pause)) && global.pause != 1
 {global.pause = 2-global.pause}
 
 // Animations de double saut

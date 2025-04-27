@@ -111,7 +111,7 @@ function damage(pv_loss, dmg_duration, h_knockback, v_knockback)
 // Fonction attaque
 
 function atk()
-{	
+{
 	if state = "neutral"
 	{
 		if key_action_2
@@ -119,7 +119,7 @@ function atk()
 			if key_up
 			{return "spe_up"}
 			else if key_down
-			{return "spe down"}
+			{return "spe_down"}
 			else if key_left || key_right || abs(hsp) >= min_sideatk_speed
 			{return "spe_side"}
 			else {return "spe_b"}

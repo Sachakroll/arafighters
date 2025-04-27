@@ -1,12 +1,16 @@
 // Sélection
 
-if oTitleMonitor.p1_selected_char = owner.char_number
+if oTitleMonitor.p1_selected_char = owner.char_number && oTitleMonitor.p2_selected_char = owner.char_number
 {
-	image_index = 1
+	image_index = 3
 }
 else
 {
-	if oTitleMonitor.p2_selected_char = owner.char_number
+	if oTitleMonitor.p1_selected_char = owner.char_number
+	{
+		image_index = 1
+	}
+	else if oTitleMonitor.p2_selected_char = owner.char_number
 	{
 		image_index = 2
 	}

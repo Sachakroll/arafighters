@@ -7,9 +7,7 @@ push_force = 1
 
 // Attaques
 
-// 
-
-// Boomerang (s)
+// Boomerang
 
 has_boomerang = true
 

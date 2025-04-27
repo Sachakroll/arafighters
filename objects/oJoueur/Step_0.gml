@@ -18,7 +18,7 @@ if !mort && !mort_fin && state != "damage"
 		key_action_1_end = keyboard_check_released(global.player1_key_action1)
 		key_action_2_end = keyboard_check_released(global.player1_key_action2)
 	}
-	if player = 2
+	if player = 2 && global.p2_controller = -1
 	{
 		key_left = keyboard_check(global.player2_key_left)
 		key_right = keyboard_check(global.player2_key_right)
@@ -39,9 +39,15 @@ if !mort && !mort_fin && state != "damage"
 		var gp_move_y = gamepad_axis_value(global.p1_controller, global.p1_gp_y_axis)
 		key_left = gp_move_x < -global.gp_deadzone
 		key_right = gp_move_x > global.gp_deadzone
-		key_up = gp_move_y < -global.gp_deadzone
-		key_down = gp_move_y > global.gp_deadzone
-		key_jump = key_up && !prev_key_up
+		if global.p1_gp_invert_y_axis
+		{
+			key_up = gp_move_y > global.gp_deadzone
+			key_down = gp_move_y < -global.gp_deadzone
+		}else{
+			key_up = gp_move_y < -global.gp_deadzone
+			key_down = gp_move_y > global.gp_deadzone
+		}
+		key_jump = (key_up && !prev_key_up) || gamepad_button_check_pressed(global.p1_controller, global.p1_gp_jump)
 		key_action_1 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action1)
 		key_action_2 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action2)
 	}
@@ -52,9 +58,15 @@ if !mort && !mort_fin && state != "damage"
 		var gp_move_y = gamepad_axis_value(global.p2_controller, global.p2_gp_y_axis)
 		key_left = gp_move_x < -global.gp_deadzone
 		key_right = gp_move_x > global.gp_deadzone
-		key_up = gp_move_y < -global.gp_deadzone
-		key_down = gp_move_y > global.gp_deadzone
-		key_jump = key_up && !prev_key_up
+		if global.p2_gp_invert_y_axis
+		{
+			key_up = gp_move_y > global.gp_deadzone
+			key_down = gp_move_y < -global.gp_deadzone
+		}else{
+			key_up = gp_move_y < -global.gp_deadzone
+			key_down = gp_move_y > global.gp_deadzone
+		}
+		key_jump = (key_up && !prev_key_up) || gamepad_button_check_pressed(global.p2_controller, global.p2_gp_jump)
 		key_action_1 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action1)
 		key_action_2 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action2)
 	}

@@ -24,7 +24,7 @@ if oTitleMonitor.state = "char"
 {
 	image_alpha = 1
 }
-if oTitleMonitor.state = "title" || oTitleMonitor.state = "choice" || oTitleMonitor.state = "rules"
+if oTitleMonitor.state = "title" || oTitleMonitor.state = "choice" || oTitleMonitor.state = "rules" || oTitleMonitor.state = "options"
 {
 	image_alpha = 0
 }

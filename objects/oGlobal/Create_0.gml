@@ -3,8 +3,9 @@
 fullscreen = false
 
 global.ruleset_time = 5
-global.ruleset_vies = 1
+global.ruleset_vies = 5
 
+global.skip_title_after_config = false
 global.map = Map_bus
 
 // Son
@@ -43,18 +44,32 @@ global.player2_key_pause = ord("Y")
 global.p1_controller = -1
 global.p2_controller = -1
 
-global.gp_deadzone = 0.3
+global.gp_deadzone = 0.5
 
 // Joueur 1
 
 global.p1_gp_x_axis = 0
-global.p1_gp_y_axis = 3
-global.p1_gp_action1 = 1
-global.p1_gp_action2 = 2
+global.p1_gp_y_axis = 1
+global.p1_gp_invert_y_axis = 1
+global.p1_gp_jump = 15
+
+global.p1_gp_action1 = 13
+global.p1_gp_action2 = 12
+global.p1_gp_guard = 9
+global.p1_gp_grab = 8
+
+global.p1_gp_pause = 4
 
 // Joueur 2
 
 global.p2_gp_x_axis = 0
 global.p2_gp_y_axis = 3
+global.p2_gp_invert_y_axis = 0
+global.p2_gp_jump = 6
+
 global.p2_gp_action1 = 1
 global.p2_gp_action2 = 2
+global.p2_gp_guard = 3
+global.p2_gp_grab = 4
+
+global.p2_gp_pause = 5

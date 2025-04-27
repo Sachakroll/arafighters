@@ -28,6 +28,6 @@ if oTitleMonitor.state = "choice"
 	image_alpha = 0
 }
 
-if oTitleMonitor.selected_options = 0 {image_index = 0}
-else if oTitleMonitor.selected_options = 1 {image_index = 1}
+if global.selected_options = 0 {image_index = 0}
+else if global.selected_options = 1 {image_index = 1}
 else {image_index = 2}

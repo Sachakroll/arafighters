@@ -26,9 +26,9 @@ l38_synchro = "cour"
 selected_rules = 1
 global.ruleset_style = "vies"
 
-selected_options = 0
-selected_controls = 0
-selectable_controls_max = 3
+global.selected_options = 0
+fade_timer_while_reentering_title = 0
+fade_time_while_reentering_title = 60
 alternating_bit = 0
 
 load_time = 120
@@ -55,3 +55,28 @@ for (var i = 1; i <= half_char_number*2; i += 1)
 	})
 	instance_create_layer(0, 0, "Char", oChar_fond, {owner : _cadre})
 }
+
+// Placement des cadres de réglage des contrôles
+
+instance_create_layer(0, 0, "Char", oOptions_controls,
+{
+	sprite_index : sOptions_controls_p1,
+	player : 1
+})
+instance_create_layer(396, 0, "Char", oOptions_controls,
+{
+	sprite_index : sOptions_controls_p2,
+	player : 2
+})
+
+// Initialisation des directions du joystick
+
+p1_c_up = 0
+p1_c_down = 0
+p1_c_left = 0
+p1_c_right = 0
+
+p2_c_up = 0
+p2_c_down = 0
+p2_c_left = 0
+p2_c_right = 0

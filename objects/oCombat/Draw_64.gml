@@ -15,12 +15,14 @@ cvide = make_color_rgb(cnum, 0, 0)
 cplein = make_color_rgb(cnum, cnum, 0)
 
 // Barres rouges
+
 draw_rectangle_color(ecart_x_barre_pv, ecart_y_barre_pv,
 ecart_x_barre_pv+taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv, cvide, cvide, cvide, cvide, false)
 draw_rectangle_color(1280-ecart_x_barre_pv-taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv,
 1280-ecart_x_barre_pv, ecart_y_barre_pv, cvide, cvide , cvide, cvide, false)
 
 // Barres jaunes
+
 if global.p1_inst.pv != 0
 {
 	draw_rectangle_color(ecart_x_barre_pv, ecart_y_barre_pv,
