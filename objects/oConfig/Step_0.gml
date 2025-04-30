@@ -294,6 +294,8 @@ if state = "fade2"
 	fade_timer --
 	if fade_timer = 0
 	{
+		// Assigner les contrôles configurés au joueur
+		
 		if global.config_player = 1
 		{
 			global.p1_gp_y_axis = y_axis
@@ -317,6 +319,43 @@ if state = "fade2"
 			global.p2_gp_guard = guard_button
 			global.p2_gp_grab = grab_button
 			global.p2_gp_pause = pause_button
+		}
+		
+		// Sauvegarder les nouveaux contrôles sur un fichier
+		
+		if global.config_player = 1
+		{
+			var _struct = {
+				_y_axis : global.p1_gp_y_axis,
+				_invert_y_axis : global.p1_gp_invert_y_axis,
+				_x_axis : global.p1_gp_x_axis,
+				_jump : global.p1_gp_jump,
+				_act1 : global.p1_gp_action1,
+				_act2 : global.p1_gp_action2,
+				_guard : global.p1_gp_guard,
+				_grab : global.p1_gp_grab,
+				_pause : global.p1_gp_pause}
+			var _string = json_stringify(_struct)
+			var _file = file_text_open_write(string(gamepad_get_description(global.p1_controller))+".txt")
+			file_text_write_string(_file, _string)
+			file_text_close(_file)
+		}
+		if global.config_player = 2
+		{
+			var _struct = {
+				_y_axis : global.p2_gp_y_axis,
+				_invert_y_axis : global.p2_gp_invert_y_axis,
+				_x_axis : global.p2_gp_x_axis,
+				_jump : global.p2_gp_jump,
+				_act1 : global.p2_gp_action1,
+				_act2 : global.p2_gp_action2,
+				_guard : global.p2_gp_guard,
+				_grab : global.p2_gp_grab,
+				_pause : global.p2_gp_pause}
+			var _string = json_stringify(_struct)
+			var _file = file_text_open_write(string(gamepad_get_description(global.p2_controller))+".txt")
+			file_text_write_string(_file, _string)
+			file_text_close(_file)
 		}
 		
 		global.skip_title_after_config = true

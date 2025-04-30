@@ -6,7 +6,7 @@ state = "fade1"
 fade_time = 60
 fade_timer = 0
 
-// Initialisations des personnages
+// Initialisations des personnages (à supprimmer plus tard)
 
 global.player1_char = oGabriel
 global.player2_char = oGabriel

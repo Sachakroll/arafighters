@@ -50,22 +50,22 @@ global.gp_deadzone = 0.5
 
 global.p1_gp_x_axis = 0
 global.p1_gp_y_axis = 1
-global.p1_gp_invert_y_axis = 1
-global.p1_gp_jump = 15
+global.p1_gp_invert_y_axis = 0
+global.p1_gp_jump = 0
 
-global.p1_gp_action1 = 13
-global.p1_gp_action2 = 12
-global.p1_gp_guard = 9
-global.p1_gp_grab = 8
+global.p1_gp_action1 = 1
+global.p1_gp_action2 = 2
+global.p1_gp_guard = 3
+global.p1_gp_grab = 4
 
-global.p1_gp_pause = 4
+global.p1_gp_pause = 5
 
 // Joueur 2
 
 global.p2_gp_x_axis = 0
-global.p2_gp_y_axis = 3
+global.p2_gp_y_axis = 1
 global.p2_gp_invert_y_axis = 0
-global.p2_gp_jump = 6
+global.p2_gp_jump = 0
 
 global.p2_gp_action1 = 1
 global.p2_gp_action2 = 2
