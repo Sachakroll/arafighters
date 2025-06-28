@@ -2,11 +2,15 @@
 
 fullscreen = false
 
+global.ruleset_style = "vies"
 global.ruleset_time = 5
 global.ruleset_vies = 5
 
 global.skip_title_after_config = false
+global.title_enable_fade_in = false
+
 global.map = Map_bus
+global.easteregg_state = 0
 
 // Son
 
@@ -24,6 +28,8 @@ global.player1_key_down = ord("S")
 
 global.player1_key_action1 = vk_space
 global.player1_key_action2 = vk_lshift
+global.player1_key_guard = 69
+global.player1_key_grab = 65
 
 global.player1_key_pause = ord("T")
 
@@ -36,6 +42,8 @@ global.player2_key_down = 192
 
 global.player2_key_action1 = vk_ralt
 global.player2_key_action2 = vk_enter
+global.player2_key_guard = 186
+global.player2_key_grab = 80
 
 global.player2_key_pause = ord("Y")
 

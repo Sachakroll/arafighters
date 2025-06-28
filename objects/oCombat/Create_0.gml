@@ -29,6 +29,14 @@ ecart_y_barre_pv = 10
 taille_x_barre_pv = 479
 taille_y_barre_pv = 39
 
+p1_displayed_pv = 0
+p2_displayed_pv = 0
+p1_old_pv = 0
+p2_old_pv = 0
+
+barre_pv_dmg_time = 10
+barre_pv_refill_time = 30
+
 x_pos_timer = 600
 x_char_size = 24
 

@@ -15,8 +15,6 @@ if !mort && !mort_fin && state != "damage"
 		key_action_2 = keyboard_check_pressed(global.player1_key_action2)
 		key_action_1_hold = keyboard_check(global.player1_key_action1)
 		key_action_2_hold = keyboard_check(global.player1_key_action2)
-		key_action_1_end = keyboard_check_released(global.player1_key_action1)
-		key_action_2_end = keyboard_check_released(global.player1_key_action2)
 	}
 	if player = 2 && global.p2_controller = -1
 	{
@@ -29,8 +27,6 @@ if !mort && !mort_fin && state != "damage"
 		key_action_2 = keyboard_check_pressed(global.player2_key_action2)
 		key_action_1_hold = keyboard_check(global.player2_key_action1)
 		key_action_2_hold = keyboard_check(global.player2_key_action2)
-		key_action_1_end = keyboard_check_released(global.player2_key_action1)
-		key_action_2_end = keyboard_check_released(global.player2_key_action2)
 	}
 	if player = 1 && global.p1_controller != -1
 	{
@@ -50,6 +46,8 @@ if !mort && !mort_fin && state != "damage"
 		key_jump = (key_up && !prev_key_up) || gamepad_button_check_pressed(global.p1_controller, global.p1_gp_jump)
 		key_action_1 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action1)
 		key_action_2 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action2)
+		key_action_1_hold = gamepad_button_check(global.p1_controller, global.p1_gp_action1)
+		key_action_2_hold = gamepad_button_check(global.p1_controller, global.p1_gp_action2)
 	}
 	if player = 2 && global.p2_controller != -1
 	{
@@ -69,6 +67,8 @@ if !mort && !mort_fin && state != "damage"
 		key_jump = (key_up && !prev_key_up) || gamepad_button_check_pressed(global.p2_controller, global.p2_gp_jump)
 		key_action_1 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action1)
 		key_action_2 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action2)
+		key_action_1_hold = gamepad_button_check(global.p2_controller, global.p2_gp_action1)
+		key_action_2_hold = gamepad_button_check(global.p2_controller, global.p2_gp_action2)
 	}
 }
 else

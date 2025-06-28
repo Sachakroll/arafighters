@@ -116,29 +116,48 @@ function atk()
 	{
 		if key_action_2
 		{
-			if key_up
+			if key_up 
 			{return "spe_up"}
-			else if key_down
+			if key_down && !key_left && !key_right 
 			{return "spe_down"}
-			else if key_left || key_right || abs(hsp) >= min_sideatk_speed
+			if key_left || key_right || abs(hsp) >= min_sideatk_speed 
 			{return "spe_side"}
-			else {return "spe_b"}
+			return "spe_b"
 		}
 		if key_action_1
 		{
 			if key_up && !key_left && !key_right
 			{return "atk_up"}
-			else if key_down && !on_ground
+			if key_down && !on_ground
 			{return "atk_downair"}
-			else if (key_left || key_right) && !on_ground && abs(hsp) >= min_sideatk_speed
+			if (key_left || key_right) && !on_ground && abs(hsp) >= min_sideatk_speed
 			{return "atk_sideair"}
-			else if on_ground && abs(hsp) >= min_dash_speed
+			if on_ground && abs(hsp) >= min_dash_speed
 			{return "atk_dash"}
-			else
-			{
-				if sneak {return "atk_sneak"}
-				else {return "atk_b"}
-			}
+			return "atk_b"
+		}
+	}
+}
+function atk_charge()
+{
+	if state = "neutral"
+	{
+		if key_action_2_hold
+		{
+			if key_up 
+			{return "spe_up"}
+			if key_down && !key_left && !key_right 
+			{return "spe_down"}
+			if key_left || key_right || abs(hsp) >= min_sideatk_speed 
+			{return "spe_side"}
+			return "spe_b"
+		}
+		if key_action_1_hold
+		{
+			if key_up && !key_left && !key_right
+			{return "atk_up"}
+			if abs(hsp) < min_dash_speed && !key_down && ((!key_left && !key_right) || on_ground || abs(hsp) < min_sideatk_speed)
+			{return "atk_b"}
 		}
 	}
 }

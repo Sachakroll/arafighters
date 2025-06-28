@@ -16,7 +16,7 @@ if room = Config
 }
 else
 {
-	if oCombat.state = "fade1"
+	if oCombat.state = "fade1" || oCombat.state = "fade2"
 	{
 		x = 0
 		y = 0

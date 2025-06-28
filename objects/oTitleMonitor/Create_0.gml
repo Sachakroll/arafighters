@@ -5,13 +5,12 @@ choice_cooldown = 0
 
 char_cadres_do_move = true
 
-global.easteregg_state = 0
 easteregg_msg_timer = -1
 easteregg_msg_duration = 80
 easteregg_msg_text = ""
 
-char_logo_y_position = 300
-map_logo_y_position = 436
+char_logo_y_position = 306
+map_logo_y_position = 480
 titleheight = 72
 anim1_dur = 24
 
@@ -24,7 +23,6 @@ cour_rotonde_synchro = "cour"
 l38_synchro = "cour"
 
 selected_rules = 1
-global.ruleset_style = "vies"
 
 global.selected_options = 0
 fade_timer_while_reentering_title = 0

@@ -16,4 +16,9 @@ if init = 0
 		global.selected_options = 1
 		global.skip_title_after_config = false
 	}
+	if global.title_enable_fade_in = true
+	{
+		fade_timer_while_reentering_title = fade_time_while_reentering_title
+		global.title_enable_fade_in = false
+	}
 }

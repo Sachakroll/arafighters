@@ -1,6 +1,6 @@
 // Fondu de l'interface
 
-if state = "fade1"
+if state = "fade1" || state = "fade2"
 {
 	cnum = 255*fade_timer/fade_time
 }else
@@ -8,31 +8,47 @@ if state = "fade1"
 	cnum = 255
 }
 
-// Barres de vie
+// Calcul des valeurs affichées des barres de vie
+
+if p1_displayed_pv = global.p1_inst.pv {p1_old_pv = global.p1_inst.pv}
+else{
+	if global.p1_inst.pv = global.p1_inst.max_pv {p1_displayed_pv -= (p1_old_pv-global.p1_inst.pv)/barre_pv_refill_time}
+	else {p1_displayed_pv -= (p1_old_pv-global.p1_inst.pv)/barre_pv_dmg_time}
+}
+if p1_displayed_pv > global.p1_inst.max_pv {p1_displayed_pv = global.p1_inst.pv}
+
+if p2_displayed_pv = global.p2_inst.pv {p2_old_pv = global.p2_inst.pv}
+else{
+	if global.p2_inst.pv = global.p2_inst.max_pv {p2_displayed_pv -= (p2_old_pv-global.p2_inst.pv)/barre_pv_refill_time}
+	else{p2_displayed_pv -= (p2_old_pv-global.p2_inst.pv)/barre_pv_dmg_time}
+}
+if p2_displayed_pv > global.p2_inst.max_pv {p2_displayed_pv = global.p2_inst.pv}
+
+// Couleurs des barres de vie
 
 white = make_color_rgb(cnum, cnum, cnum)
 cvide = make_color_rgb(cnum, 0, 0)
 cplein = make_color_rgb(cnum, cnum, 0)
 
-// Barres rouges
+// Barres vides
 
 draw_rectangle_color(ecart_x_barre_pv, ecart_y_barre_pv,
 ecart_x_barre_pv+taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv, cvide, cvide, cvide, cvide, false)
 draw_rectangle_color(1280-ecart_x_barre_pv-taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv,
 1280-ecart_x_barre_pv, ecart_y_barre_pv, cvide, cvide , cvide, cvide, false)
 
-// Barres jaunes
+// Barres pleines
 
-if global.p1_inst.pv != 0
+if p1_displayed_pv != 0
 {
 	draw_rectangle_color(ecart_x_barre_pv, ecart_y_barre_pv,
-	ecart_x_barre_pv+taille_x_barre_pv*global.p1_inst.pv/global.p1_inst.max_pv,
+	ecart_x_barre_pv+taille_x_barre_pv*p1_displayed_pv/global.p1_inst.max_pv,
 	ecart_y_barre_pv+taille_y_barre_pv, cplein, cplein, cplein, cplein, false)
 }
-if global.p2_inst.pv != 0
+if p2_displayed_pv != 0
 {
 	draw_rectangle_color(1280-ecart_x_barre_pv-taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv,
-	1280-ecart_x_barre_pv-taille_x_barre_pv*(1-global.p2_inst.pv/global.p2_inst.max_pv),
+	1280-ecart_x_barre_pv-taille_x_barre_pv*(1-p2_displayed_pv/global.p2_inst.max_pv),
 	ecart_y_barre_pv, cplein, cplein, cplein, cplein, false)
 }
 

@@ -53,6 +53,6 @@ for (var i = 0; i < gamepad_get_device_count(); i++)
 		if global.p2_controller = i {global.p2_controller = -1}
 	}
 }
-show_debug_message(global.p1_gp_y_axis)
+
 //show_debug_message("1 : "+string(global.p1_controller))
 //show_debug_message("2 : "+string(global.p2_controller))
