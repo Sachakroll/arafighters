@@ -3,8 +3,17 @@ init = 0
 // Transition
 
 state = "fade1"
-fade_time = 60
+fade_time = 80
 fade_timer = 0
+intro_timer = 0
+intro_duration = 180
+pre_fin = false
+pre_fin_timer = 0
+pre_fin_vies_time = 40
+pre_fin_temps_time = 10
+fin_timer = 0
+
+if global.battle_intro_skip {fade_time = 12}
 
 // Initialisations des personnages (à supprimmer plus tard)
 
@@ -16,7 +25,7 @@ global.player2_hitbox_sprite = sPotvin_hitbox
 // Initilisation du timer
 
 if global.ruleset_style = "temps"
-{global.battle_timer = global.ruleset_time*3600+60}
+{global.battle_timer = global.ruleset_time*3600}
 if global.ruleset_style = "vies"
 {global.battle_timer = 0}
 
@@ -49,3 +58,10 @@ global.y_offscreen_projectile_margin = 32
 
 p1_doublejumping = false
 p2_doublejumping = false
+
+// Création d'objets
+
+layer_create((layer_get_depth(layer_get_id("Fade"))+layer_get_depth(layer_get_id("Avant_plan")))/2, "Menu")
+instance_create_layer(0, 0, "Menu", oPause)
+instance_create_layer(0, 0, "Menu", oBattle_intro)
+instance_create_layer(0, 0, "Menu", oBattle_mot_fin)

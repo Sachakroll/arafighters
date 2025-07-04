@@ -71,7 +71,6 @@ pv = max_pv
 dmg_timer = 0
 
 mort = false
-mort_fin = false
 
 resurrect_timer = 0
 resurrect_cooldown = 60
@@ -80,7 +79,7 @@ resurrect_cooldown = 60
 
 function damage(pv_loss, dmg_duration, h_knockback, v_knockback)
 {
-	if dmg_timer = 0 && !mort_fin && !mort
+	if dmg_timer = 0 && !mort
 	{
 		// Dégats si on ne meurt pas
 		if pv-pv_loss > 0

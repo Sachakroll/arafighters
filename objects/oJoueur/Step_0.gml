@@ -2,7 +2,7 @@ if global.pause = 0 {
 
 // Récupération des touches pressées
 
-if !mort && !mort_fin && state != "damage"
+if !mort && state != "damage" && oCombat.state = "combat"
 {
 	if player = 1 && global.p1_controller = -1
 	{
@@ -272,7 +272,7 @@ if dmg_timer > 0 {state = "damage"
 
 // Résurrection
 
-if mort && !mort_fin && resurrect_timer >= resurrect_cooldown
+if mort && (vies != 0 || global.ruleset_style != "vies") && resurrect_timer >= resurrect_cooldown
 {
 	mort = false
 	state = "neutral"

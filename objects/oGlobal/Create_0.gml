@@ -81,3 +81,7 @@ global.p2_gp_guard = 3
 global.p2_gp_grab = 4
 
 global.p2_gp_pause = 5
+
+// Debug
+
+global.battle_intro_skip = false

@@ -1,8 +1,43 @@
+// Intro
+
+if state = "intro"
+{
+	intro_timer ++
+	if intro_timer >= intro_duration {state = "combat"}
+	if global.battle_intro_skip // Debug
+	{
+		state = "combat"
+		global.battle_intro_skip = false
+	}
+}
+
+// Fin du combat
+
+if pre_fin && global.pause = 0 && state = "combat"
+{
+	pre_fin_timer ++
+	if (pre_fin_timer >= pre_fin_temps_time && global.ruleset_style = "temps")
+	|| (pre_fin_timer >= pre_fin_vies_time && global.ruleset_style = "vies")
+	{
+		state = "fin"
+		fin_timer = 0
+	}
+}
+if state = "fin"
+{
+	fin_timer ++
+	if fin_timer = 240
+	{
+		fade_timer = fade_time
+		state = "fade2"
+	}
+}
+
 // Fondu de début
 
 if state = "fade1"
 {
-	fade_timer += 1
+	fade_timer ++
 	if fade_timer = fade_time {state = "intro"}
 }
 
@@ -10,7 +45,7 @@ if state = "fade1"
 
 if state = "fade2"
 {
-	fade_timer -= 1
+	fade_timer --
 	if fade_timer <= 0
 	{
 		global.title_enable_fade_in = true
@@ -20,24 +55,27 @@ if state = "fade2"
 
 // Timer
 
-if global.ruleset_style = "vies" && global.pause = 0
+if global.ruleset_style = "vies" && global.pause = 0 && state = "combat"
 {global.battle_timer ++}
-if global.ruleset_style = "temps" && global.pause = 0
+if global.ruleset_style = "temps" && global.pause = 0 && state = "combat"
 {
-	if global.battle_timer = 0 && state != "fade2"//à modifier p-ê
+	if global.battle_timer = 0
 	{
-		//à modifier
-		state = "fade2"
-		fade_timer = fade_time
+		pre_fin = true
 	}
 	if global.battle_timer != 0 {global.battle_timer --}
 }
 
+// Fin du combat si un joueur meurt
+
+if global.ruleset_style = "vies" && state = "combat"
+{with oJoueur {if vies = 0 && mort {oCombat.pre_fin = true}}}
+
 // Pause
 
-if (keyboard_check_pressed(global.player1_key_pause) || gamepad_button_check_pressed(global.p1_controller, global.p1_gp_pause)) && global.pause != 2
+if (keyboard_check_pressed(global.player1_key_pause) || gamepad_button_check_pressed(global.p1_controller, global.p1_gp_pause)) && global.pause != 2 && state = "combat"
 {global.pause = 1-global.pause}
-if (keyboard_check_pressed(global.player2_key_pause) || gamepad_button_check_pressed(global.p2_controller, global.p2_gp_pause)) && global.pause != 1
+if (keyboard_check_pressed(global.player2_key_pause) || gamepad_button_check_pressed(global.p2_controller, global.p2_gp_pause)) && global.pause != 1 && state = "combat"
 {global.pause = 2-global.pause}
 
 // Quitter le combat
