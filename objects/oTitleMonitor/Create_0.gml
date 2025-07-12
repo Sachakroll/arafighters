@@ -14,7 +14,7 @@ map_logo_y_position = 480
 titleheight = 72
 anim1_dur = 24
 
-half_char_number = 5
+half_char_number = 3
 p1_selected_char = 1
 p2_selected_char = half_char_number
 
@@ -35,7 +35,7 @@ load_timer = 0
 load_logo_start = 540
 load_logo_movement = 640
 
-characters_short_names_list = ["Gab", "Potv", "Grj", "Mouv", "Sousa", "Huv", "Suppl1", "Lmb", "Bern", "Bubu"]
+characters_short_names_list = ["Gab", "Mouv", "Lmb", "Sousa", "Bubu", "Bern"]
 
 init = 0
 

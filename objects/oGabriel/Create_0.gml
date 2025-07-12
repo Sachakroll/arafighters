@@ -7,12 +7,21 @@ push_force = 1
 
 // Attaques
 
-// Boomerang
+// Atk_b
 
-has_boomerang = true
+atk_b_type = 0
+atk_b_startup_time = 10
+atk_b_active_time = 10
+atk_b_recovery_time = 10
 
-boomerang_startup_time = 20 // Pour le boomerang, les frames actives sont comptées dans le startup_time
-boomerang_recovery_time = 16 + boomerang_startup_time
+// Spe_side
+
+spe_side_type = "boomerang"
+spe_side_startup_time = 20
+spe_side_active_time = 0
+spe_side_recovery_time = 16
+
+n_max_projectiles_spe_side = 1
 
 boomerang_sprite = sGab_boomerang
 boomerang_rotation_sp = 7
@@ -27,5 +36,3 @@ boomerang_dmg = 10
 boomerang_dmg_duration = 25
 boomerang_h_knockback = 2
 boomerang_v_knockback = -2
-
-n_max_boomerang = 1

@@ -94,8 +94,7 @@ else {move = 0}
 // Est-ce que le joueur est sur le sol
 
 time_since_on_ground ++
-
-if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && (!key_down || (state = "spe_side" && has_boomerang))) || place_meeting(x, y+1, adv_inst)
+if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && !(key_down && state = "neutral")) || place_meeting(x, y+1, adv_inst)
      {on_ground = true
 	  time_since_on_ground = 0}
 else {on_ground = false}
@@ -230,7 +229,7 @@ if place_meeting(x, y, adv_inst)
 
 // Collisions avec les plateformes
 
-if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && (!key_down || state = "spe_side")
+if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && !(key_down && state = "neutral")
 {
 	while !place_meeting(x, y + sign(vsp)*collision_step, oPlateforme)
 	{
@@ -307,46 +306,97 @@ attack_timer ++
 
 if is_string(atk()) {show_debug_message("p"+string(player)+" "+atk())} // Debug
 
-// Attaque boomerang
+// Atk_b
 
-if has_boomerang
+if atk() = "atk_b" && state = "neutral"
 {
-	n_boomerang = projectile_nb_check(oProjectile, sGab_boomerang, id)
+	state = "atk_b_startup"
+	attack_timer = 0
+}
 	
-	if atk() = "spe_side" && n_boomerang < n_max_boomerang
+if state = "atk_b_startup"
+{
+	if attack_timer >= atk_b_startup_time
 	{
-		state = "spe_side"
+		state = "atk_b_active"
 		attack_timer = 0
-		if dir = 1 {angle = 0}
-		if dir = -1 {angle = pi}
 	}
+}
+	
+if state = "atk_b_active"
+{
+	if attack_timer >= atk_b_active_time
+	{
+		state = "atk_b_recovery"
+		attack_timer = 0
+	}
+}
 
-	if state = "spe_side" && attack_timer <= boomerang_startup_time && (key_up || key_down)
+if state = "atk_b_recovery"
+{
+	if attack_timer >= atk_b_recovery_time
+	{state = "neutral"}
+}
+
+// Spe_side
+
+if spe_side_type = "boomerang"
+{n_projectiles_spe_side = projectile_nb_check(oProjectile, sGab_boomerang, id)}
+
+if atk() = "spe_side" && state = "neutral"
+{
+	state = "spe_side_startup"
+	attack_timer = 0
+	
+	if spe_side_type = "boomerang"
+	{
+		if n_projectiles_spe_side >= n_max_projectiles_spe_side
+		{
+			state = "neutral"
+		}
+	}
+}
+	
+if state = "spe_side_startup"
+{
+	if attack_timer >= spe_side_startup_time
+	{
+		state = "spe_side_active"
+		attack_timer = 0
+	}
+	
+	if spe_side_type = "boomerang"
 	{
 		if dir = 1
 		{
 			if key_up {angle = boomerang_angle}
-			if key_down {angle = -boomerang_angle}
+			else if key_down {angle = -boomerang_angle}
+			else {angle = 0}
 		}
 		if dir = -1
 		{
 			if key_up {angle = pi-boomerang_angle}
-			if key_down {angle = pi+boomerang_angle}
+			else if key_down {angle = pi+boomerang_angle}
+			else {angle = pi}
 		}
 	}
-
-	if state = "spe_side" && attack_timer = boomerang_recovery_time && state != "damage"
-	{state = "neutral"}
-
-	if state = "spe_side" && attack_timer = boomerang_startup_time
+}
+	
+if state = "spe_side_active"
+{
+	if attack_timer >= spe_side_active_time
+	{
+		state = "spe_side_recovery"
+		attack_timer = 0
+	}
+	
+	if spe_side_type = "boomerang"
 	{
 		if move = sign(hsp)
 		{
 			added_speed = abs(hsp)
 			added_portee = boomerang_coefficient_portee_bonus * abs(hsp)
-		}
-		else
-		{
+		}else{
 			added_speed = 0
 			added_portee = 0
 		}
@@ -367,6 +417,12 @@ if has_boomerang
 			v_knockback : boomerang_v_knockback
 		})
 	}
+}
+
+if state = "spe_side_recovery"
+{
+	if attack_timer >= spe_side_recovery_time
+	{state = "neutral"}
 }
 
 

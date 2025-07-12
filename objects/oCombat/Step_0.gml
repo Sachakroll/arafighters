@@ -21,12 +21,44 @@ if pre_fin && global.pause = 0 && state = "combat"
 	{
 		state = "fin"
 		fin_timer = 0
+		
+		// Déterminer le vainqueur (peut-être à déplacer plus tard)
+		if global.p1_inst.vies > global.p2_inst.vies {winner = 1}
+		if global.p2_inst.vies > global.p1_inst.vies {winner = 2}
 	}
 }
 if state = "fin"
 {
 	fin_timer ++
 	if fin_timer = 240
+	{
+		instance_create_layer(0, 0, "Menu", oBattle_end_infos)
+		state = "end_infos_appearing"
+		end_timer = 0
+	}
+}
+
+if state = "end_infos_appearing"
+{
+	end_timer ++
+	if end_timer = end_appear_time {state = "end_infos"}
+}
+if state = "end_infos"
+{
+	if keyboard_check_pressed_anykey(1) || gamepad_check_pressed_anykey(1)
+	{end_infos_p1_done = true}
+	if keyboard_check_pressed_anykey(2) || gamepad_check_pressed_anykey(2)
+	{end_infos_p2_done = true}
+	if end_infos_p1_done && end_infos_p2_done
+	{
+		state = "end_infos_disappearing"
+		end_timer = 0
+	}
+}
+if state = "end_infos_disappearing"
+{
+	end_timer ++
+	if end_timer = end_disappear_time
 	{
 		fade_timer = fade_time
 		state = "fade2"

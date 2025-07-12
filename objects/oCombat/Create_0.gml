@@ -1,6 +1,6 @@
 init = 0
 
-// Transition
+// Fin et début du combat
 
 state = "fade1"
 fade_time = 80
@@ -12,8 +12,17 @@ pre_fin_timer = 0
 pre_fin_vies_time = 40
 pre_fin_temps_time = 10
 fin_timer = 0
+end_timer = 0
+end_appear_time = 40
+end_disappear_time = 40
+end_infos_p1_done = false
+end_infos_p2_done = false
 
 if global.battle_intro_skip {fade_time = 12}
+
+// Déroulé du combat
+
+winner = 0
 
 // Initialisations des personnages (à supprimmer plus tard)
 

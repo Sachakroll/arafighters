@@ -6,7 +6,7 @@ if init = 0
 	title_titre_y_position = oTitre.y
 	
 	// Revenir de la configuration de la manette
-
+	
 	if global.skip_title_after_config = true
 	{
 		oTitre.y_center -= titleheight

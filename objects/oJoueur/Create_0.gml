@@ -13,9 +13,7 @@ pushed_force = 0
 still_timer = 0
 still = true
 
-n_projectile = 0
-
-// Initialisation des réglages
+// Initialisation des réglages par défaut
 
 ground_walk_acc = 0.7
 air_walk_acc = 0.25
@@ -49,10 +47,62 @@ attack_timer = 0
 
 min_sideatk_speed = 1.6 // doit être plus grand que max_sneaksp
 min_dash_speed = 3.7 // doit être plus grand que max_sneaksp
-atk_charge = 0
-min_atk_charge = 10
 
-has_boomerang = false
+// Atk_b
+atk_b_type = 0
+atk_b_startup_time = 0
+atk_b_active_time = 0
+atk_b_recovery_time = 0
+
+// Atk_dash
+atk_dash_type = 0
+atk_dash_startup_time = 0
+atk_dash_active_time = 0
+atk_dash_recovery_time = 0
+
+// Atk_up
+atk_up_type = 0
+atk_up_startup_time = 0
+atk_up_active_time = 0
+atk_up_recovery_time = 0
+
+// Atk_downair
+atk_downair_type = 0
+atk_downair_startup_time = 0
+atk_downair_active_time = 0
+atk_downair_recovery_time = 0
+
+// Atk_sideair
+atk_sideair_type = 0
+atk_sideair_startup_time = 0
+atk_sideair_active_time = 0
+atk_sideair_recovery_time = 0
+
+// Spe_b
+spe_b_type = 0
+spe_b_startup_time = 0
+spe_b_active_time = 0
+spe_b_recovery_time = 0
+
+// Spe_side
+spe_side_type = 0
+spe_side_startup_time = 0
+spe_side_active_time = 0
+spe_side_recovery_time = 0
+
+n_max_projectiles_spe_side = 0
+
+// Spe_up
+spe_up_type = 0
+spe_up_startup_time = 0
+spe_up_active_time = 0
+spe_up_recovery_time = 0
+
+// Spe_down
+spe_down_type = 0
+spe_down_startup_time = 0
+spe_down_active_time = 0
+spe_down_recovery_time = 0
 
 // Initialisation de la vie et du timer
 

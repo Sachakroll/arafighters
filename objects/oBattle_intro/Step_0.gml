@@ -23,6 +23,10 @@ if active && phase < 3
 	{
 		phase ++
 		image_index ++
+		
+		// Easter Egg
+		if global.easteregg_state = 2 && phase = 3
+		{audio_play_sound(sndSmileman_voice_easteregg, 100, false)}
 	}
 }
 if active && phase = 3
@@ -39,3 +43,9 @@ if active && phase >= 4
 	image_alpha = 0
 	visible = false
 }
+
+// Easter Egg
+
+if global.easteregg_state = 2 && phase = 3
+{sprite_index = sIntro_easter_egg}
+else {sprite_index = sIntro_numbers}

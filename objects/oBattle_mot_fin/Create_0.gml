@@ -1,5 +1,13 @@
-x = 0
-y = 0
+if global.ruleset_style = "vies"
+{
+	x = 24
+	y = -12
+}
+if global.ruleset_style = "temps"
+{
+	x = 0
+	y = 0
+}
 visible = false
 image_alpha = 0
 image_speed = 0
