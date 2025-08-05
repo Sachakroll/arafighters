@@ -18,6 +18,9 @@ end_disappear_time = 40
 end_infos_p1_done = false
 end_infos_p2_done = false
 
+global.p1_dmg_taken = 0
+global.p2_dmg_taken = 0
+
 if global.battle_intro_skip {fade_time = 12}
 
 // Déroulé du combat
@@ -29,7 +32,7 @@ winner = 0
 global.player1_char = oGabriel
 global.player2_char = oGabriel
 global.player1_hitbox_sprite = sGabriel_hitbox
-global.player2_hitbox_sprite = sPotvin_hitbox
+global.player2_hitbox_sprite = sGabriel_hitbox
 
 // Initilisation du timer
 

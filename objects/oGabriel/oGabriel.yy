@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sGabriel_m_still",
-    "path":"sprites/sGabriel_m_still/sGabriel_m_still.yy",
+    "name":"sGabriel_m_d",
+    "path":"sprites/sGabriel_m_d/sGabriel_m_d.yy",
   },
   "spriteMaskId":null,
   "visible":true,

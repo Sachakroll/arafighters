@@ -10,8 +10,8 @@ has_jumped = false
 time_since_on_ground = 0
 doublejump_count = 0
 pushed_force = 0
-still_timer = 0
-still = true
+if player = 1 {dir = 1}
+if player = 2 {dir = -1}
 
 // Initialisation des réglages par défaut
 
@@ -27,12 +27,15 @@ sneak_acc = 0.4
 max_sneaksp = 1.5 // doit être plus petit que min_sideatk_speed et que min_dash_speed
 sneak_jumpforce = 6
 
-sneak_pixel_difference = 24
-still_cooldown_duration = 300
+sneak_pixel_difference = 20
 max_doublejump_amount = 1
 min_doublejump_height = 8
-frct = 0.3
+
+ground_frct = 0.3
+dash_frct = 0.15
 air_frct = 0.025
+frct = ground_frct
+
 normal_grv = 0.3
 key_down_grv = 0.5
 grv = normal_grv
@@ -142,6 +145,9 @@ function damage(pv_loss, dmg_duration, h_knockback, v_knockback)
 			mort = true
 			resurrect_timer = 0
 		}
+		// Score
+		if player = 1 {global.p1_dmg_taken += pv_loss}
+		if player = 2 {global.p2_dmg_taken += pv_loss}
 		// Recul
 		hsp += h_knockback
 		vsp += v_knockback
@@ -179,7 +185,7 @@ function atk()
 			{return "atk_up"}
 			if key_down && !on_ground
 			{return "atk_downair"}
-			if (key_left || key_right) && !on_ground && abs(hsp) >= min_sideatk_speed
+			if !on_ground && abs(hsp) >= min_sideatk_speed
 			{return "atk_sideair"}
 			if on_ground && abs(hsp) >= min_dash_speed
 			{return "atk_dash"}

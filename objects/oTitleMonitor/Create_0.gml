@@ -35,7 +35,7 @@ load_timer = 0
 load_logo_start = 540
 load_logo_movement = 640
 
-characters_short_names_list = ["Gab", "Mouv", "Lmb", "Sousa", "Bubu", "Bern"]
+characters_short_names_list = ["Gab", "Mouv", "Lmb", "Sousa", "Lab", "Bern"]
 
 init = 0
 

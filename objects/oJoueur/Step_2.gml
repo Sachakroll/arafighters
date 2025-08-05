@@ -10,13 +10,9 @@ var sprite = s_prefix
 if sneak {sprite += "_sneak"}
 else {sprite += "_m"}
 
-if still = true {sprite += "_still"}
-else
-{
-	if hsp != 0 {sprite += "_r"}
-	if dir = -1 {sprite += "_g"}
-	if dir = 1  {sprite += "_d"}
-}
+if hsp != 0 {sprite += "_r"}
+if dir = -1 {sprite += "_g"}
+if dir = 1  {sprite += "_d"}
 
 // Application du sprite
 

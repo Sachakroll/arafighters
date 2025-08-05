@@ -10,7 +10,6 @@ if init = 0
 	global.p1_hitbox_inst = instance_create_layer(global.player1_spawn_x,global.player1_spawn_y,"Player",oHitbox,
 	{
 		owner : global.p1_inst,
-		sprite_index : global.player1_hitbox_sprite
 	})
 	
 	// Joueur 2
@@ -21,7 +20,6 @@ if init = 0
 	global.p2_hitbox_inst = instance_create_layer(global.player2_spawn_x,global.player2_spawn_y,"Player",oHitbox,
 	{
 		owner : global.p2_inst,
-		sprite_index : global.player2_hitbox_sprite
 	})
 	
 	// Variables données aux joueurs

@@ -27,10 +27,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"sGabriel_m_still",
-    "path":"sprites/sGabriel_m_still/sGabriel_m_still.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

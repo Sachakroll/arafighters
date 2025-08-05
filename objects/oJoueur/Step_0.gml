@@ -101,10 +101,14 @@ else {on_ground = false}
 
 // Sneak on/off
 
-if key_down && on_ground && !place_meeting(x, y+1, oPlateforme) && (sneak || state = "neutral")
-{sneak = true}
-else if !place_meeting(x, y-sneak_pixel_difference, oCollision)
-{sneak = false}
+if state = "neutral"
+{
+	if key_down && on_ground && !place_meeting(x, y+1, oPlateforme) && (sneak || state = "neutral")
+	{sneak = true}
+	else if !place_meeting(x, y-sneak_pixel_difference, oCollision)
+	{sneak = false}
+}
+if state = "damage" && !place_meeting(x, y-sneak_pixel_difference, oCollision) {sneak = false}
 
 // Vitesse et déplacement en sneak / pas en sneak
 
@@ -128,20 +132,18 @@ if state = "neutral"
 if key_down {grv = key_down_grv}
 else {grv = normal_grv}
 
-// Frottements différents dans l'air et sur le sol
+// Frottements
 
 if on_ground
 {
-	if hsp >= frct                                       {hsp -= frct}
-	if hsp <= -frct                                      {hsp += frct}
-	if hsp > -frct && hsp < frct && move = 0             {hsp = 0}
+	if state = "atk_dash_startup" || state = "atk_dash_active" || state = "atk_dash_recovery" {frct = dash_frct}
+	else {frct = ground_frct}
 }
-if !on_ground
-{
-	if hsp >= air_frct                                   {hsp -= air_frct}
-	if hsp <= -air_frct                                  {hsp += air_frct}
-	if hsp > -air_frct && hsp < air_frct && move = 0     {hsp = 0}
-}
+else {frct = air_frct}
+
+if hsp >= frct                                       {hsp -= frct}
+if hsp <= -frct                                      {hsp += frct}
+if hsp > -frct && hsp < frct && move = 0             {hsp = 0}
 
 // Application de la gravité
 
@@ -252,16 +254,9 @@ if on_ground {y = round(y)}
 
 if state = "neutral"
 {
-	if key_left {dir = -1
-		still_timer = 0
-		still = false}
-	if key_right {dir = 1
-		still_timer = 0
-		still = false}
+	if key_left {dir = -1}
+	if key_right {dir = 1}
 }
-
-still_timer++
-if still_timer >= still_cooldown_duration {still = true}
 
 // Dégats et capacité d'attaquer
 
@@ -281,23 +276,39 @@ resurrect_timer	++
 
 // Collisions avec un projectile
 
-var collisions = []
+var projectiles = []
 
-with (oProjectile)
+with oProjectile
 {
-	if (expediteur != other.id || friendly_fire) && place_meeting(x, y, other.id)
-	{array_push(collisions, id)}
+	if other.own_hitbox.inst_collision(other.x, other.y, id) && actif && (expediteur != other.id || friendly_fire)
+	{array_push(projectiles, id)}
 }
 
-for (var i = 0; i < array_length(collisions); i++)
+for (var i = 0; i < array_length(projectiles); i++)
 {
-	var projectile = collisions[i]
+	var projectile = projectiles[i]
 	
-	if projectile.type = "boomerang" && projectile.actif = true
-	{
-		damage(projectile.degats, projectile.dmg_duration, projectile.h_knockback*sign(x-projectile.x), projectile.v_knockback)
-		projectile.actif = false
-	}
+	damage(projectile.degats, projectile.dmg_duration, projectile.h_knockback*sign(x-projectile.x), projectile.v_knockback)
+	
+	if projectile.type = "boomerang" 
+	{projectile.actif = false}
+}
+
+// Collisions avec une Atk_box
+
+var touched_boxes = []
+
+with oAtk_box
+{
+	if other.own_hitbox.inst_collision(other.x, other.y, id) && actif && owner != other.id
+	{array_push(touched_boxes, id)}
+}
+
+for (var i = 0; i < array_length(touched_boxes); i++)
+{
+	var touched_box = touched_boxes[i]
+	
+	damage(touched_box.degats, touched_box.dmg_duration, touched_box.h_knockback*touched_box.atk_dir, touched_box.v_knockback)
 }
 
 // Attaques
@@ -310,10 +321,27 @@ if is_string(atk()) {show_debug_message("p"+string(player)+" "+atk())} // Debug
 
 if atk() = "atk_b" && state = "neutral"
 {
+	if atk_b_type = "pierce"
+	{
+		atk_b_box_inst = instance_create_layer(x, y, "Player", oAtk_box,
+		{
+			sprite_index : atk_b_box_sprite,
+			owner : id,
+			x_pos : atk_b_base_x_pos*dir,
+			y_pos : atk_b_base_y_pos + sneak*sneak_pixel_difference,
+			degats : atk_b_degats,
+			dmg_duration : atk_b_dmg_duration,
+			h_knockback : atk_b_h_knockback,
+			v_knockback : atk_b_v_knockback,
+			actif : false,
+			atk_dir : dir
+		})
+	}
+	
 	state = "atk_b_startup"
 	attack_timer = 0
 }
-	
+
 if state = "atk_b_startup"
 {
 	if attack_timer >= atk_b_startup_time
@@ -322,9 +350,17 @@ if state = "atk_b_startup"
 		attack_timer = 0
 	}
 }
-	
+
 if state = "atk_b_active"
 {
+	if atk_b_type = "pierce"
+	{
+		if attack_timer < atk_b_active_time/2
+		{atk_b_box_inst.x_pos += 2*dir*atk_b_portee_suppl_x/atk_b_active_time}
+		if attack_timer > atk_b_active_time/2
+		{atk_b_box_inst.x_pos -= 2*dir*atk_b_portee_suppl_x/atk_b_active_time}
+	}
+	
 	if attack_timer >= atk_b_active_time
 	{
 		state = "atk_b_recovery"
@@ -335,7 +371,78 @@ if state = "atk_b_active"
 if state = "atk_b_recovery"
 {
 	if attack_timer >= atk_b_recovery_time
-	{state = "neutral"}
+	{
+		state = "neutral"
+		
+		if atk_b_type = "pierce"
+		{
+			instance_destroy(atk_b_box_inst)
+		}
+	}
+}
+
+// Atk_dash
+
+if atk() = "atk_dash" && state = "neutral"
+{
+	if atk_dash_type = "pierce"
+	{
+		atk_dash_box_inst = instance_create_layer(x, y, "Player", oAtk_box,
+		{
+			sprite_index : atk_dash_box_sprite,
+			owner : id,
+			x_pos : atk_dash_base_x_pos*dir,
+			y_pos : atk_dash_base_y_pos + sneak*sneak_pixel_difference,
+			degats : atk_dash_degats,
+			dmg_duration : atk_dash_dmg_duration,
+			h_knockback : atk_dash_h_knockback,
+			v_knockback : atk_dash_v_knockback,
+			actif : false,
+			atk_dir : dir
+		})
+	}
+	
+	state = "atk_dash_startup"
+	attack_timer = 0
+}
+
+if state = "atk_dash_startup"
+{
+	if attack_timer >= atk_dash_startup_time
+	{
+		state = "atk_dash_active"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_dash_active"
+{
+	if atk_dash_type = "pierce"
+	{
+		if attack_timer < atk_dash_active_time/2
+		{atk_dash_box_inst.x_pos += 2*dir*atk_dash_portee_suppl_x/atk_dash_active_time}
+		if attack_timer > atk_dash_active_time/2
+		{atk_dash_box_inst.x_pos -= 2*dir*atk_dash_portee_suppl_x/atk_dash_active_time}
+	}
+	
+	if attack_timer >= atk_dash_active_time
+	{
+		state = "atk_dash_recovery"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_dash_recovery"
+{
+	if attack_timer >= atk_dash_recovery_time
+	{
+		state = "neutral"
+		
+		if atk_dash_type = "pierce"
+		{
+			instance_destroy(atk_dash_box_inst)
+		}
+	}
 }
 
 // Spe_side
@@ -345,9 +452,6 @@ if spe_side_type = "boomerang"
 
 if atk() = "spe_side" && state = "neutral"
 {
-	state = "spe_side_startup"
-	attack_timer = 0
-	
 	if spe_side_type = "boomerang"
 	{
 		if n_projectiles_spe_side >= n_max_projectiles_spe_side
@@ -355,16 +459,13 @@ if atk() = "spe_side" && state = "neutral"
 			state = "neutral"
 		}
 	}
-}
 	
+	state = "spe_side_startup"
+	attack_timer = 0
+}
+
 if state = "spe_side_startup"
 {
-	if attack_timer >= spe_side_startup_time
-	{
-		state = "spe_side_active"
-		attack_timer = 0
-	}
-	
 	if spe_side_type = "boomerang"
 	{
 		if dir = 1
@@ -380,16 +481,16 @@ if state = "spe_side_startup"
 			else {angle = pi}
 		}
 	}
-}
 	
-if state = "spe_side_active"
-{
-	if attack_timer >= spe_side_active_time
+	if attack_timer >= spe_side_startup_time
 	{
-		state = "spe_side_recovery"
+		state = "spe_side_active"
 		attack_timer = 0
 	}
-	
+}
+
+if state = "spe_side_active"
+{
 	if spe_side_type = "boomerang"
 	{
 		if move = sign(hsp)
@@ -406,23 +507,33 @@ if state = "spe_side_active"
 			expediteur: id,
 			friendly_fire : false,
 			sprite_index: boomerang_sprite,
+			degats : boomerang_degats,
+			dmg_duration : boomerang_dmg_duration,
+			h_knockback : boomerang_h_knockback,
+			v_knockback : boomerang_v_knockback,
+			actif : true,
+			
 			rotation_sp : boomerang_rotation_sp,
 			angle : angle,
 			portee : boomerang_portee + added_portee,
 			vitesse : boomerang_sp + added_speed,
 			temps_acc_retour : boomerang_comeback_acc_time,
-			degats : boomerang_dmg,
-			dmg_duration : boomerang_dmg_duration,
-			h_knockback : boomerang_h_knockback,
-			v_knockback : boomerang_v_knockback
 		})
+	}
+	
+	if attack_timer >= spe_side_active_time
+	{
+		state = "spe_side_recovery"
+		attack_timer = 0
 	}
 }
 
 if state = "spe_side_recovery"
 {
 	if attack_timer >= spe_side_recovery_time
-	{state = "neutral"}
+	{
+		state = "neutral"
+	}
 }
 
 

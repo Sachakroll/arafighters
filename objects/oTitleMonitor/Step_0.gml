@@ -656,26 +656,30 @@ if state = "load"
 	{
 		// Chargement
 		
-		if p1_selected_char = 1 {global.player1_char = oGabriel}
-		if p2_selected_char = 1 {global.player2_char = oGabriel}
-		if p1_selected_char = 2 {global.player1_char = oPotvin}
-		if p2_selected_char = 2 {global.player2_char = oPotvin}
-		if p1_selected_char = 3 {global.player1_char = oGrandjean}
-		if p2_selected_char = 3 {global.player2_char = oGrandjean}
-		if p1_selected_char = 4 {global.player1_char = oMouvet}
-		if p2_selected_char = 4 {global.player2_char = oMouvet}
-		if p1_selected_char = 5 {global.player1_char = oSousa}
-		if p2_selected_char = 5 {global.player2_char = oSousa}
-		if p1_selected_char = 6 {global.player1_char = oHuvelle}
-		if p2_selected_char = 6 {global.player2_char = oHuvelle}
-		if p1_selected_char = 7 {global.player1_char = oSuppl_1}
-		if p2_selected_char = 7 {global.player2_char = oSuppl_1}
-		if p1_selected_char = 8 {global.player1_char = oLambe}
-		if p2_selected_char = 8 {global.player2_char = oLambe}
-		if p1_selected_char = 9 {global.player1_char = oBernard}
-		if p2_selected_char = 9 {global.player2_char = oBernard}
-		if p1_selected_char = 10 {global.player1_char = oBurniat}
-		if p2_selected_char = 10 {global.player2_char = oBurniat}
+		if p1_selected_char = 1 {global.player1_char = oGabriel
+			global.player1_hitbox_sprite = sGabriel_hitbox}
+		if p2_selected_char = 1 {global.player2_char = oGabriel
+			global.player2_hitbox_sprite = sGabriel_hitbox}
+		if p1_selected_char = 2 {global.player1_char = oMouvet
+			global.player1_hitbox_sprite = sMouvet_hitbox}
+		if p2_selected_char = 2 {global.player2_char = oMouvet
+			global.player2_hitbox_sprite = sMouvet_hitbox}
+		if p1_selected_char = 3 {global.player1_char = oLambe
+			global.player1_hitbox_sprite = sLambe_hitbox}
+		if p2_selected_char = 3 {global.player2_char = oLambe
+			global.player2_hitbox_sprite = sLambe_hitbox}
+		if p1_selected_char = 4 {global.player1_char = oSousa
+			global.player1_hitbox_sprite = sSousa_hitbox}
+		if p2_selected_char = 4 {global.player2_char = oSousa
+			global.player2_hitbox_sprite = sSousa_hitbox}
+		if p1_selected_char = 5 {global.player1_char = oLabiffe
+			global.player1_hitbox_sprite = sLabiffe_hitbox}
+		if p2_selected_char = 5 {global.player2_char = oLabiffe
+			global.player2_hitbox_sprite = sLabiffe_hitbox}
+		if p1_selected_char = 6 {global.player1_char = oBernard
+			global.player1_hitbox_sprite = sBernard_hitbox}
+		if p2_selected_char = 6 {global.player2_char = oBernard
+			global.player2_hitbox_sprite = sBernard_hitbox}
 		
 		if selected_map = "cour" {global.map = Map_cour}
 		if selected_map = "rot" {global.map = Map_cour}
