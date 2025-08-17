@@ -638,14 +638,9 @@ if state = "map to load"
 		state = "load"
 		load_timer = 0
 		oLogo.y = load_logo_start
-	}
-}
-if state = "load to map"
-{
-	if timer = anim1_dur
-	{
-		timer = -1
-		state = "map"
+		
+		// Arrêter la musique de l'écran titre
+		audio_sound_gain(global.music, 0, load_time*50/3)
 	}
 }
 

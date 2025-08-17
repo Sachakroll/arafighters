@@ -25,6 +25,9 @@ if pre_fin && global.pause = 0 && state = "combat"
 		// Déterminer le vainqueur (peut-être à déplacer plus tard)
 		if global.p1_inst.vies > global.p2_inst.vies {winner = 1}
 		if global.p2_inst.vies > global.p1_inst.vies {winner = 2}
+		
+		// Arrêter la musique du combat
+		audio_sound_gain(global.music, 0, 4000)
 	}
 }
 if state = "fin"

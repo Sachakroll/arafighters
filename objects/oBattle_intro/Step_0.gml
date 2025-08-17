@@ -10,6 +10,9 @@ if oCombat.state = "intro" && !active
 		phase = 3
 		timer = 180
 		image_index = 3
+		
+		// Musique
+		global.music = audio_play_sound(battle_select_music(), 100, true)
 	}
 }
 if active && phase < 3
@@ -24,9 +27,9 @@ if active && phase < 3
 		phase ++
 		image_index ++
 		
-		// Easter Egg
-		if global.easteregg_state = 2 && phase = 3
-		{audio_play_sound(sndSmileman_voice_easteregg, 100, false)}
+		// Musique
+		if phase = 3
+		{global.music = audio_play_sound(battle_select_music(), 100, true)}
 	}
 }
 if active && phase = 3

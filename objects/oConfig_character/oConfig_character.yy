@@ -27,7 +27,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"sGabriel_m_d",
+    "path":"sprites/sGabriel_m_d/sGabriel_m_d.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

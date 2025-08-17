@@ -21,4 +21,8 @@ if init = 0
 		fade_timer_while_reentering_title = fade_time_while_reentering_title
 		global.title_enable_fade_in = false
 	}
+	
+	// Lancement de la musique de l'écran titre
+	
+	if state = "title" {global.music = audio_play_sound(mTitle, 100, true)}
 }

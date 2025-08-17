@@ -1,3 +1,5 @@
+// Initialisation
+
 state = "title"
 timer = 0
 selected_choice = 1

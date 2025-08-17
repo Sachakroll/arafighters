@@ -56,12 +56,14 @@ atk_b_type = 0
 atk_b_startup_time = 0
 atk_b_active_time = 0
 atk_b_recovery_time = 0
+atk_b_box_inst = -1
 
 // Atk_dash
 atk_dash_type = 0
 atk_dash_startup_time = 0
 atk_dash_active_time = 0
 atk_dash_recovery_time = 0
+atk_dash_box_inst = -1
 
 // Atk_up
 atk_up_type = 0
@@ -153,6 +155,20 @@ function damage(pv_loss, dmg_duration, h_knockback, v_knockback)
 		vsp += v_knockback
 		// Reset le cooldown de dégats
 		dmg_timer = dmg_duration
+		// Suppression des box d'attaque en cours quand on prend un coup
+		if state != "neutral"
+		{
+			if atk_b_box_inst != -1
+			{
+				instance_destroy(atk_b_box_inst)
+				atk_b_box_inst = -1
+			}
+			if atk_dash_box_inst != -1
+			{
+				instance_destroy(atk_dash_box_inst)
+				atk_dash_box_inst = -1
+			}
+		}
 		// État de dégats
 		state = "damage"
 	}

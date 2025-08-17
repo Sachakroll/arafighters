@@ -230,10 +230,7 @@
   "sdfSpread":8,
   "size":17.0,
   "styleName":"Demibold",
-  "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
-  },
+  "textureGroupId":null,
   "TTFName":"",
   "usesSDF":false,
 }

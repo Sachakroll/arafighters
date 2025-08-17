@@ -377,6 +377,7 @@ if state = "atk_b_recovery"
 		if atk_b_type = "pierce"
 		{
 			instance_destroy(atk_b_box_inst)
+			atk_b_box_inst = -1
 		}
 	}
 }
@@ -441,6 +442,7 @@ if state = "atk_dash_recovery"
 		if atk_dash_type = "pierce"
 		{
 			instance_destroy(atk_dash_box_inst)
+			atk_dash_box_inst = -1
 		}
 	}
 }

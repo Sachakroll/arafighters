@@ -6,8 +6,13 @@ if keyboard_check_pressed(vk_f1)
 	{
 		room_goto(global.map)
 		global.battle_intro_skip = true
+		audio_stop_sound(global.music)
 	}
-	else{room_goto(Title)}
+	else
+	{
+		room_goto(Title)
+		audio_stop_sound(global.music)
+	}
 }
 
 //if keyboard_check_pressed(vk_anykey)
