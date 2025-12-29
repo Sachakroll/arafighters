@@ -3,23 +3,23 @@ if choice_cooldown > 0 {choice_cooldown -= 1}
 
 alternating_bit = 1 - alternating_bit
 
-// Touches du clavier
+// Initialisation des touches
 
-key_p1_cp_ok = keyboard_check_pressed(global.player1_key_action1)
-key_p1_cp_back = keyboard_check_pressed(global.player1_key_action2)
+key_p1_cp_ok = false
+key_p1_cp_back = false
 
-key_p1_cp_up = keyboard_check_pressed(global.player1_key_up)
-key_p1_cp_down = keyboard_check_pressed(global.player1_key_down)
-key_p1_cp_left = keyboard_check_pressed(global.player1_key_left)
-key_p1_cp_right = keyboard_check_pressed(global.player1_key_right)
+key_p1_cp_up = false
+key_p1_cp_down = false
+key_p1_cp_left = false
+key_p1_cp_right = false
 
-key_p1_c_left = keyboard_check(global.player1_key_left)
-key_p1_c_right = keyboard_check(global.player1_key_right)
+key_p1_c_left = false
+key_p1_c_right = false
 
-key_p2_cp_up = keyboard_check_pressed(global.player2_key_up)
-key_p2_cp_down = keyboard_check_pressed(global.player2_key_down)
-key_p2_cp_left = keyboard_check_pressed(global.player2_key_left)
-key_p2_cp_right = keyboard_check_pressed(global.player2_key_right)
+key_p2_cp_up = false
+key_p2_cp_down = false
+key_p2_cp_left = false
+key_p2_cp_right = false
 
 // Manettes
 
@@ -74,6 +74,24 @@ if global.p2_controller != -1
 	key_p2_cp_left = p2_c_left && !prev_c_left
 	key_p2_cp_right = p2_c_right && !prev_c_right
 }
+
+// Touches du clavier
+
+key_p1_cp_ok = keyboard_check_pressed(global.player1_key_action1) || key_p1_cp_ok
+key_p1_cp_back = keyboard_check_pressed(global.player1_key_action2) || key_p1_cp_back
+
+key_p1_cp_up = keyboard_check_pressed(global.player1_key_up) || key_p1_cp_up
+key_p1_cp_down = keyboard_check_pressed(global.player1_key_down) || key_p1_cp_down
+key_p1_cp_left = keyboard_check_pressed(global.player1_key_left) || key_p1_cp_left
+key_p1_cp_right = keyboard_check_pressed(global.player1_key_right) || key_p1_cp_right
+
+key_p1_c_left = keyboard_check(global.player1_key_left) || key_p1_c_left
+key_p1_c_right = keyboard_check(global.player1_key_right) || key_p1_c_right
+
+key_p2_cp_up = keyboard_check_pressed(global.player2_key_up) || key_p2_cp_up
+key_p2_cp_down = keyboard_check_pressed(global.player2_key_down) || key_p2_cp_down
+key_p2_cp_left = keyboard_check_pressed(global.player2_key_left) || key_p2_cp_left
+key_p2_cp_right = keyboard_check_pressed(global.player2_key_right) || key_p2_cp_right
 
 // Écran titre
 

@@ -15,12 +15,15 @@ if player = 2 {dir = -1}
 
 // Initialisation des réglages par défaut
 
+hand_height = 56
+
 ground_walk_acc = 0.7
 air_walk_acc = 0.25
 walk_acc = ground_walk_acc
 max_walksp = 4
-normal_jumpforce = 8.5
-normal_doublejumpforce = 6.5
+normal_jumpforce = 8
+normal_doublejumpforce = 6
+normal_headbounceforce = 4.5
 jump_cheat_time = 4
 
 sneak_acc = 0.4
@@ -70,30 +73,37 @@ atk_up_type = 0
 atk_up_startup_time = 0
 atk_up_active_time = 0
 atk_up_recovery_time = 0
+atk_up_box_inst = -1
 
 // Atk_downair
 atk_downair_type = 0
 atk_downair_startup_time = 0
 atk_downair_active_time = 0
 atk_downair_recovery_time = 0
+atk_downair_box_inst = -1
 
 // Atk_sideair
 atk_sideair_type = 0
 atk_sideair_startup_time = 0
 atk_sideair_active_time = 0
 atk_sideair_recovery_time = 0
+atk_sideair_box_inst = -1
 
 // Spe_b
 spe_b_type = 0
 spe_b_startup_time = 0
 spe_b_active_time = 0
 spe_b_recovery_time = 0
+spe_b_box_inst = -1
+
+n_max_projectiles_spe_b = 0
 
 // Spe_side
 spe_side_type = 0
 spe_side_startup_time = 0
 spe_side_active_time = 0
 spe_side_recovery_time = 0
+spe_side_box_inst = -1
 
 n_max_projectiles_spe_side = 0
 
@@ -102,12 +112,14 @@ spe_up_type = 0
 spe_up_startup_time = 0
 spe_up_active_time = 0
 spe_up_recovery_time = 0
+spe_up_box_inst = -1
 
 // Spe_down
 spe_down_type = 0
 spe_down_startup_time = 0
 spe_down_active_time = 0
 spe_down_recovery_time = 0
+spe_down_box_inst = -1
 
 // Initialisation de la vie et du timer
 
@@ -168,6 +180,41 @@ function damage(pv_loss, dmg_duration, h_knockback, v_knockback)
 				instance_destroy(atk_dash_box_inst)
 				atk_dash_box_inst = -1
 			}
+			if atk_up_box_inst != -1
+			{
+				instance_destroy(atk_up_box_inst)
+				atk_up_box_inst = -1
+			}
+			if atk_downair_box_inst != -1
+			{
+				instance_destroy(atk_downair_box_inst)
+				atk_downair_box_inst = -1
+			}
+			if atk_sideair_box_inst != -1
+			{
+				instance_destroy(atk_sideair_box_inst)
+				atk_sideair_box_inst = -1
+			}
+			if spe_b_box_inst != -1
+			{
+				instance_destroy(spe_b_box_inst)
+				spe_b_box_inst = -1
+			}
+			if spe_side_box_inst != -1
+			{
+				instance_destroy(spe_side_box_inst)
+				spe_side_box_inst = -1
+			}
+			if spe_up_box_inst != -1
+			{
+				instance_destroy(spe_up_box_inst)
+				spe_up_box_inst = -1
+			}
+			if spe_down_box_inst != -1
+			{
+				instance_destroy(spe_down_box_inst)
+				spe_down_box_inst = -1
+			}
 		}
 		// État de dégats
 		state = "damage"
@@ -209,7 +256,7 @@ function atk()
 		}
 	}
 }
-function atk_charge()
+/*function atk_charge()
 {
 	if state = "neutral"
 	{
@@ -231,7 +278,7 @@ function atk_charge()
 			{return "atk_b"}
 		}
 	}
-}
+}*/
 
 // Création du oPointeur_joueur
 

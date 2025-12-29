@@ -80,3 +80,21 @@ p2_c_up = 0
 p2_c_down = 0
 p2_c_left = 0
 p2_c_right = 0
+
+// Initialisation des touches
+
+key_p1_cp_ok = false
+key_p1_cp_back = false
+
+key_p1_cp_up = false
+key_p1_cp_down = false
+key_p1_cp_left = false
+key_p1_cp_right = false
+
+key_p1_c_left = false
+key_p1_c_right = false
+
+key_p2_cp_up = false
+key_p2_cp_down = false
+key_p2_cp_left = false
+key_p2_cp_right = false

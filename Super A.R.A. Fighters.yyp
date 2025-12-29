@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Super A.R.A. Fighters",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -35,7 +35,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.13.1.193",
+    "IDEVersion":"2024.14.2.213",
   },
   "name":"Super A.R.A. Fighters",
   "resources":[
@@ -73,6 +73,7 @@
     {"id":{"name":"oMap_choix","path":"objects/oMap_choix/oMap_choix.yy",},},
     {"id":{"name":"oMap_cour","path":"objects/oMap_cour/oMap_cour.yy",},},
     {"id":{"name":"oMap_titre","path":"objects/oMap_titre/oMap_titre.yy",},},
+    {"id":{"name":"oMouv_spe_b_feuille","path":"objects/oMouv_spe_b_feuille/oMouv_spe_b_feuille.yy",},},
     {"id":{"name":"oMouvet","path":"objects/oMouvet/oMouvet.yy",},},
     {"id":{"name":"oNuages_title","path":"objects/oNuages_title/oNuages_title.yy",},},
     {"id":{"name":"oOptions_controls","path":"objects/oOptions_controls/oOptions_controls.yy",},},
@@ -130,6 +131,7 @@
     {"id":{"name":"sFade_black","path":"sprites/sFade_black/sFade_black.yy",},},
     {"id":{"name":"sGab_atk_b_box","path":"sprites/sGab_atk_b_box/sGab_atk_b_box.yy",},},
     {"id":{"name":"sGab_atk_dash_box","path":"sprites/sGab_atk_dash_box/sGab_atk_dash_box.yy",},},
+    {"id":{"name":"sGab_atk_downair_box","path":"sprites/sGab_atk_downair_box/sGab_atk_downair_box.yy",},},
     {"id":{"name":"sGab_boomerang","path":"sprites/sGab_boomerang/sGab_boomerang.yy",},},
     {"id":{"name":"sGabriel_hitbox","path":"sprites/sGabriel_hitbox/sGabriel_hitbox.yy",},},
     {"id":{"name":"sGabriel_m_d","path":"sprites/sGabriel_m_d/sGabriel_m_d.yy",},},
@@ -161,6 +163,7 @@
     {"id":{"name":"sMoniteurTitre","path":"sprites/sMoniteurTitre/sMoniteurTitre.yy",},},
     {"id":{"name":"sMot_fin","path":"sprites/sMot_fin/sMot_fin.yy",},},
     {"id":{"name":"sMot_ko","path":"sprites/sMot_ko/sMot_ko.yy",},},
+    {"id":{"name":"sMouv_spe_b_feuille","path":"sprites/sMouv_spe_b_feuille/sMouv_spe_b_feuille.yy",},},
     {"id":{"name":"sMouvet_hitbox","path":"sprites/sMouvet_hitbox/sMouvet_hitbox.yy",},},
     {"id":{"name":"sNuages_title","path":"sprites/sNuages_title/sNuages_title.yy",},},
     {"id":{"name":"sOptions_controls_p1","path":"sprites/sOptions_controls_p1/sOptions_controls_p1.yy",},},

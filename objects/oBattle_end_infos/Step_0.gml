@@ -1,4 +1,4 @@
-if oCombat.state = "end_infos_appearing"
++if oCombat.state = "end_infos_appearing"
 {
 	visible = true
 	image_alpha += 1/oCombat.end_appear_time

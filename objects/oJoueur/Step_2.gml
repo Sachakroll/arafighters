@@ -1,7 +1,10 @@
 ///@description Animations
 
-if global.pause = 0 {image_speed = 1}
-else {image_speed = 0}
+if global.pause != 0 {image_speed = 0}
+else{
+	image_speed = 1
+	if hsp != 0 {image_speed = abs(hsp)/max_walksp}
+}
 
 var sprite = s_prefix
 

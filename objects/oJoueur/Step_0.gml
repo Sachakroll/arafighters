@@ -196,7 +196,7 @@ if place_meeting(x, y+vsp, adv_inst)
 		y = y + sign(vsp) * collision_step
 	}
 	vsp = 0
-	//hsp -= sign(adv_inst.x-x)*facteur_repulsion
+	if y < adv_inst.y {vsp = -normal_headbounceforce}
 }
 
 if place_meeting(x, y, adv_inst)
@@ -231,7 +231,7 @@ if place_meeting(x, y, adv_inst)
 
 // Collisions avec les plateformes
 
-if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && !(key_down && state = "neutral")
+if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlateforme) && !(key_down && state = "neutral") && !(atk_downair_type = "pierce" && (state = "atk_downair_startup" || state = "atk_downair_active" || state = "atk_downair_recovery"))
 {
 	while !place_meeting(x, y + sign(vsp)*collision_step, oPlateforme)
 	{
@@ -239,6 +239,10 @@ if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlat
 	}
 	vsp = 0
 }
+
+// Cap de vitesse verticale
+
+if vsp < -normal_jumpforce {vsp = -normal_jumpforce}
 
 // Exécution du mouvement
 
@@ -308,6 +312,7 @@ for (var i = 0; i < array_length(touched_boxes); i++)
 {
 	var touched_box = touched_boxes[i]
 	
+	touched_box.touched = true
 	damage(touched_box.degats, touched_box.dmg_duration, touched_box.h_knockback*touched_box.atk_dir, touched_box.v_knockback)
 }
 
@@ -444,6 +449,250 @@ if state = "atk_dash_recovery"
 			instance_destroy(atk_dash_box_inst)
 			atk_dash_box_inst = -1
 		}
+	}
+}
+
+// Atk_up
+
+if atk() = "atk_up" && state = "neutral"
+{
+	if atk_up_type = "pierce"
+	{
+		atk_up_box_inst = instance_create_layer(x, y, "Player", oAtk_box,
+		{
+			sprite_index : atk_up_box_sprite,
+			owner : id,
+			x_pos : atk_up_base_x_pos*dir,
+			y_pos : atk_up_base_y_pos + sneak*sneak_pixel_difference,
+			degats : atk_up_degats,
+			dmg_duration : atk_up_dmg_duration,
+			h_knockback : atk_up_h_knockback,
+			v_knockback : atk_up_v_knockback,
+			actif : false,
+			atk_dir : dir
+		})
+	}
+	
+	state = "atk_up_startup"
+	attack_timer = 0
+}
+
+if state = "atk_up_startup"
+{
+	if attack_timer >= atk_up_startup_time
+	{
+		state = "atk_up_active"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_up_active"
+{
+	if atk_up_type = "pierce"
+	{
+		if attack_timer < atk_up_active_time/2
+		{atk_up_box_inst.y_pos -= 2*atk_up_portee_suppl_y/atk_up_active_time}
+		if attack_timer > atk_up_active_time/2
+		{atk_up_box_inst.y_pos += 2*atk_up_portee_suppl_y/atk_up_active_time}
+	}
+	
+	if attack_timer >= atk_up_active_time
+	{
+		state = "atk_up_recovery"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_up_recovery"
+{
+	if attack_timer >= atk_up_recovery_time
+	{
+		state = "neutral"
+		
+		if atk_up_type = "pierce"
+		{
+			instance_destroy(atk_up_box_inst)
+			atk_up_box_inst = -1
+		}
+	}
+}
+
+// Atk_downair
+
+if atk() = "atk_downair" && state = "neutral"
+{
+	if atk_downair_type = "pierce"
+	{
+		atk_downair_box_inst = instance_create_layer(x, y, "Player", oAtk_box,
+		{
+			sprite_index : atk_downair_box_sprite,
+			owner : id,
+			x_pos : atk_downair_base_x_pos*dir,
+			y_pos : atk_downair_base_y_pos + sneak*sneak_pixel_difference,
+			degats : atk_downair_degats,
+			dmg_duration : atk_downair_dmg_duration,
+			h_knockback : atk_downair_h_knockback,
+			v_knockback : atk_downair_v_knockback,
+			actif : false,
+			atk_dir : dir
+		})
+	}
+	
+	state = "atk_downair_startup"
+	attack_timer = 0
+}
+
+if state = "atk_downair_startup"
+{
+	if attack_timer >= atk_downair_startup_time
+	{
+		state = "atk_downair_active"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_downair_active"
+{
+	if atk_downair_type = "pierce"
+	{
+		if attack_timer < atk_downair_active_time/3
+		{atk_downair_box_inst.y_pos += 3*atk_downair_portee_suppl_y/atk_downair_active_time}
+	}
+	
+	if attack_timer >= atk_downair_active_time
+	{
+		state = "atk_downair_recovery"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_downair_recovery"
+{
+	if attack_timer >= atk_downair_recovery_time
+	{
+		state = "neutral"
+		
+		if atk_downair_type = "pierce"
+		{
+			instance_destroy(atk_downair_box_inst)
+			atk_downair_box_inst = -1
+		}
+	}
+}
+
+// Atk_sideair
+
+if atk() = "atk_sideair" && state = "neutral"
+{
+	if atk_sideair_type = "pierce"
+	{
+		atk_sideair_box_inst = instance_create_layer(x, y, "Player", oAtk_box,
+		{
+			sprite_index : atk_sideair_box_sprite,
+			owner : id,
+			x_pos : atk_sideair_base_x_pos*dir,
+			y_pos : atk_sideair_base_y_pos + sneak*sneak_pixel_difference,
+			degats : atk_sideair_degats,
+			dmg_duration : atk_sideair_dmg_duration,
+			h_knockback : atk_sideair_h_knockback,
+			v_knockback : atk_sideair_v_knockback,
+			actif : false,
+			atk_dir : dir
+		})
+	}
+	
+	state = "atk_sideair_startup"
+	attack_timer = 0
+}
+
+if state = "atk_sideair_startup"
+{
+	if attack_timer >= atk_sideair_startup_time
+	{
+		state = "atk_sideair_active"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_sideair_active"
+{
+	if atk_sideair_type = "pierce"
+	{
+		if attack_timer < atk_sideair_active_time/2
+		{atk_sideair_box_inst.x_pos += 2*dir*atk_sideair_portee_suppl_x/atk_sideair_active_time}
+		if attack_timer > atk_dash_active_time/2
+		{atk_sideair_box_inst.x_pos -= 2*dir*atk_sideair_portee_suppl_x/atk_sideair_active_time}
+	}
+	
+	if attack_timer >= atk_sideair_active_time
+	{
+		state = "atk_sideair_recovery"
+		attack_timer = 0
+	}
+}
+
+if state = "atk_sideair_recovery"
+{
+	if attack_timer >= atk_sideair_recovery_time
+	{
+		state = "neutral"
+		
+		if atk_sideair_type = "pierce"
+		{
+			instance_destroy(atk_sideair_box_inst)
+			atk_sideair_box_inst = -1
+		}
+	}
+}
+
+// Spe_b
+
+if atk() = "spe_b" && state = "neutral"
+{
+	if spe_b_type = "mitr_chb"
+	{
+		spe_b_box_inst = instance_create_layer(x, y, "Player", oMouv_spe_b_feuille,
+		{
+			sprite_index : atk_sideair_box_sprite,
+			owner : id,
+			x_pos : atk_sideair_base_x_pos*dir,
+			y_pos : atk_sideair_base_y_pos + sneak*sneak_pixel_difference,
+			degats : atk_sideair_degats,
+			dmg_duration : atk_sideair_dmg_duration,
+			h_knockback : atk_sideair_h_knockback,
+			v_knockback : atk_sideair_v_knockback,
+			actif : false,
+			atk_dir : dir
+		})
+	}
+	
+	state = "spe_b_startup"
+	attack_timer = 0
+}
+
+if state = "spe_b_startup"
+{
+	if attack_timer >= spe_b_startup_time
+	{
+		state = "spe_b_active"
+		attack_timer = 0
+	}
+}
+
+if state = "spe_b_active"
+{
+	if attack_timer >= spe_b_active_time
+	{
+		state = "spe_b_recovery"
+		attack_timer = 0
+	}
+}
+
+if state = "spe_b_recovery"
+{
+	if attack_timer >= spe_b_recovery_time
+	{
+		state = "neutral"
 	}
 }
 
