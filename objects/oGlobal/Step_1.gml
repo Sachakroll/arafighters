@@ -22,7 +22,6 @@ for (var i = 0; i < gamepad_get_device_count(); i++)
 				global.p1_gp_action1 = _struct._act1
 				global.p1_gp_action2 = _struct._act2
 				global.p1_gp_guard = _struct._guard
-				global.p1_gp_grab = _struct._grab
 				global.p1_gp_pause = _struct._pause
 			}
 		}
@@ -42,7 +41,6 @@ for (var i = 0; i < gamepad_get_device_count(); i++)
 				global.p2_gp_action1 = _struct._act1
 				global.p2_gp_action2 = _struct._act2
 				global.p2_gp_guard = _struct._guard
-				global.p2_gp_grab = _struct._grab
 				global.p2_gp_pause = _struct._pause
 			}
 		}

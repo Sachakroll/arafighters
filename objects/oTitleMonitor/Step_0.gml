@@ -674,10 +674,10 @@ if state = "load"
 		if p2_selected_char = 1 {global.player2_char = oGabriel
 			global.player2_hitbox_sprite = sGabriel_hitbox}
 		if p1_selected_char = 2 {global.player1_char = oMouvet
-			global.player1_hitbox_sprite = sMouvet_hitbox}
+			global.player1_hitbox_sprite = sMouv_hitbox}
 		if p2_selected_char = 2 {global.player2_char = oMouvet
-			global.player2_hitbox_sprite = sMouvet_hitbox}
-		if p1_selected_char = 3 {global.player1_char = oLambe
+			global.player2_hitbox_sprite = sMouv_hitbox}
+		/*if p1_selected_char = 3 {global.player1_char = oLambe
 			global.player1_hitbox_sprite = sLambe_hitbox}
 		if p2_selected_char = 3 {global.player2_char = oLambe
 			global.player2_hitbox_sprite = sLambe_hitbox}
@@ -692,7 +692,7 @@ if state = "load"
 		if p1_selected_char = 6 {global.player1_char = oBernard
 			global.player1_hitbox_sprite = sBernard_hitbox}
 		if p2_selected_char = 6 {global.player2_char = oBernard
-			global.player2_hitbox_sprite = sBernard_hitbox}
+			global.player2_hitbox_sprite = sBernard_hitbox}*/
 		
 		if selected_map = "cour" {global.map = Map_cour}
 		if selected_map = "rot" {global.map = Map_cour}

@@ -17,7 +17,6 @@ x_axis = 0
 action1_button = 0
 action2_button = 0
 guard_button = 0
-grab_button = 0
 pause_button = 0
 
 timer = 0

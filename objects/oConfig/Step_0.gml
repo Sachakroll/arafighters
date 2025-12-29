@@ -216,39 +216,6 @@ if state = "guard"
 	}
 	if timer > time/2
 	{
-		written_text = "Essayez d'attraper l'adversaire !"
-		text_alpha += 2/time
-	}
-	if timer = time
-	{
-		state = "pre_grab"
-	}
-}
-
-if state = "pre_grab"
-{
-	text_alpha = 1
-	for (var i = 0; i < gamepad_button_count(gamepad); i++)
-	{
-	    if gamepad_button_check_pressed(gamepad, i)
-		{
-			state = "grab"
-			timer = 0
-	        grab_button = i
-	        break
-	    }
-	}
-}
-
-if state = "grab"
-{
-	timer ++
-	if timer < time/2
-	{
-		text_alpha -= 2/time
-	}
-	if timer > time/2
-	{
 		written_text = "Mettez le jeu en pause !"
 		text_alpha += 2/time
 	}
@@ -305,7 +272,6 @@ if state = "fade2"
 			global.p1_gp_action1 = action1_button
 			global.p1_gp_action2 = action2_button
 			global.p1_gp_guard = guard_button
-			global.p1_gp_grab = grab_button
 			global.p1_gp_pause = pause_button
 		}
 		if global.config_player = 2
@@ -317,7 +283,6 @@ if state = "fade2"
 			global.p2_gp_action1 = action1_button
 			global.p2_gp_action2 = action2_button
 			global.p2_gp_guard = guard_button
-			global.p2_gp_grab = grab_button
 			global.p2_gp_pause = pause_button
 		}
 		
@@ -333,7 +298,6 @@ if state = "fade2"
 				_act1 : global.p1_gp_action1,
 				_act2 : global.p1_gp_action2,
 				_guard : global.p1_gp_guard,
-				_grab : global.p1_gp_grab,
 				_pause : global.p1_gp_pause}
 			var _string = json_stringify(_struct)
 			var _file = file_text_open_write(string(gamepad_get_description(global.p1_controller))+".txt")
@@ -350,7 +314,6 @@ if state = "fade2"
 				_act1 : global.p2_gp_action1,
 				_act2 : global.p2_gp_action2,
 				_guard : global.p2_gp_guard,
-				_grab : global.p2_gp_grab,
 				_pause : global.p2_gp_pause}
 			var _string = json_stringify(_struct)
 			var _file = file_text_open_write(string(gamepad_get_description(global.p2_controller))+".txt")

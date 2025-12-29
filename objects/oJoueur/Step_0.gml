@@ -15,6 +15,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 		key_action_2 = keyboard_check_pressed(global.player1_key_action2)
 		key_action_1_hold = keyboard_check(global.player1_key_action1)
 		key_action_2_hold = keyboard_check(global.player1_key_action2)
+		key_guard = keyboard_check(global.player1_key_guard)
 	}
 	if player = 2 && global.p2_controller = -1
 	{
@@ -27,6 +28,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 		key_action_2 = keyboard_check_pressed(global.player2_key_action2)
 		key_action_1_hold = keyboard_check(global.player2_key_action1)
 		key_action_2_hold = keyboard_check(global.player2_key_action2)
+		key_guard = keyboard_check(global.player2_key_guard)
 	}
 	if player = 1 && global.p1_controller != -1
 	{
@@ -48,6 +50,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 		key_action_2 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action2)
 		key_action_1_hold = gamepad_button_check(global.p1_controller, global.p1_gp_action1)
 		key_action_2_hold = gamepad_button_check(global.p1_controller, global.p1_gp_action2)
+		key_guard = gamepad_button_check(global.p1_controller, global.p1_gp_guard)
 	}
 	if player = 2 && global.p2_controller != -1
 	{
@@ -69,6 +72,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 		key_action_2 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action2)
 		key_action_1_hold = gamepad_button_check(global.p2_controller, global.p2_gp_action1)
 		key_action_2_hold = gamepad_button_check(global.p2_controller, global.p2_gp_action2)
+		key_guard = gamepad_button_check(global.p2_controller, global.p2_gp_guard)
 	}
 }
 else
@@ -82,8 +86,7 @@ else
 	key_action_2 = 0
 	key_action_1_hold = 0
 	key_action_2_hold = 0
-	key_action_1_end = 0
-	key_action_2_end = 0
+	key_guard = 0
 }
 
 // Mouvement
@@ -94,7 +97,7 @@ else {move = 0}
 // Est-ce que le joueur est sur le sol
 
 time_since_on_ground ++
-if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && !(key_down && state = "neutral")) || place_meeting(x, y+1, adv_inst)
+if place_meeting(x, y+1, oCollision) || (place_meeting(x, y+1, oPlateforme) && !place_meeting(x, y, oPlateforme) && !(key_down && state = "neutral")) //|| place_meeting(x, y+1, adv_inst)
      {on_ground = true
 	  time_since_on_ground = 0}
 else {on_ground = false}
@@ -151,21 +154,12 @@ vsp = vsp + grv
 
 // Saut
 
-if on_ground {doublejump_count = 0
-			  has_jumped = false}
+if on_ground {has_jumped = false}
 
-if (on_ground || (time_since_on_ground <= jump_cheat_time && vsp >= 0 && !has_jumped)) && key_jump && state = "neutral"
+if (on_ground || (time_since_on_ground <= jump_cheat_time && vsp >= 0 && !has_jumped)) && key_jump && state = "neutral" && !sneak && !key_down
 {
-	if sneak || key_down {vsp = -sneak_jumpforce}
-	else {vsp = -normal_jumpforce}
+	vsp = -jumpforce
 	has_jumped = true
-}
-else if !on_ground && vsp > 0 && doublejump_count < max_doublejump_amount && !place_meeting(x, y+min_doublejump_height, oCollision) && key_jump && !key_down && !sneak && state = "neutral"
-{
-	vsp = -normal_doublejumpforce
-	doublejump_count += 1
-	if player = 1 {oCombat.p1_doublejumping = true}
-	if player = 2 {oCombat.p2_doublejumping = true}
 }
 
 // Collisions avec l'adversaire
@@ -242,7 +236,7 @@ if place_meeting(x, y+vsp, oPlateforme) && vsp > 0 && !place_meeting(x, y, oPlat
 
 // Cap de vitesse verticale
 
-if vsp < -normal_jumpforce {vsp = -normal_jumpforce}
+if vsp < -jumpforce {vsp = -jumpforce}
 
 // Exécution du mouvement
 
@@ -651,12 +645,9 @@ if atk() = "spe_b" && state = "neutral"
 {
 	if spe_b_type = "mitr_chb"
 	{
-		spe_b_box_inst = instance_create_layer(x, y, "Player", oMouv_spe_b_feuille,
+		spe_b_box_inst = instance_create_layer(x, y-hand_height, "Player", oMouv_spe_b_feuille,
 		{
-			sprite_index : atk_sideair_box_sprite,
 			owner : id,
-			x_pos : atk_sideair_base_x_pos*dir,
-			y_pos : atk_sideair_base_y_pos + sneak*sneak_pixel_difference,
 			degats : atk_sideair_degats,
 			dmg_duration : atk_sideair_dmg_duration,
 			h_knockback : atk_sideair_h_knockback,
@@ -699,7 +690,7 @@ if state = "spe_b_recovery"
 // Spe_side
 
 if spe_side_type = "boomerang"
-{n_projectiles_spe_side = projectile_nb_check(oProjectile, sGab_boomerang, id)}
+{n_projectiles_spe_side = projectile_nb_check(oProjectile, boomerang_sprite, id)}
 
 if atk() = "spe_side" && state = "neutral"
 {

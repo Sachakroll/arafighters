@@ -34,8 +34,8 @@ cplein = make_color_rgb(cnum, cnum, 0)
 
 draw_rectangle_color(ecart_x_barre_pv, ecart_y_barre_pv,
 ecart_x_barre_pv+taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv, cvide, cvide, cvide, cvide, false)
-draw_rectangle_color(1280-ecart_x_barre_pv-taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv,
-1280-ecart_x_barre_pv, ecart_y_barre_pv, cvide, cvide , cvide, cvide, false)
+draw_rectangle_color(1279-ecart_x_barre_pv-taille_x_barre_pv, ecart_y_barre_pv,
+1279-ecart_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv, cvide, cvide , cvide, cvide, false)
 
 // Barres pleines
 
@@ -47,9 +47,9 @@ if p1_displayed_pv != 0
 }
 if p2_displayed_pv != 0
 {
-	draw_rectangle_color(1280-ecart_x_barre_pv-taille_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv,
-	1280-ecart_x_barre_pv-taille_x_barre_pv*(1-p2_displayed_pv/global.p2_inst.max_pv),
-	ecart_y_barre_pv, cplein, cplein, cplein, cplein, false)
+	draw_rectangle_color(1279-ecart_x_barre_pv+taille_x_barre_pv*((1-p2_displayed_pv/global.p2_inst.max_pv)-1),
+	ecart_y_barre_pv, 1279-ecart_x_barre_pv, ecart_y_barre_pv+taille_y_barre_pv,
+	cplein, cplein, cplein, cplein, false)
 }
 
 // Timer
@@ -61,14 +61,27 @@ else displayed_seconds = string(displayed_seconds)
 displayed_minutes = string(floor(global.battle_timer/3600))
 displayed_time = displayed_minutes+":"+displayed_seconds
 
-draw_text_transformed_color(x_pos_timer, -ecart_y_barre_pv, displayed_time, 2, 2, 0, white, white, white, white, 1)
+draw_text_transformed_color(x_pos_timer, y_pos_timer, displayed_time, 2, 2, 0, white, white, white, white, 1)
+
+// Cadre de la barre de vie
+
+draw_sprite_ext(sBattle_cadre_vies_fond, 0, 0, 0, 2, 2, 0, c_white, 1)
+
+draw_sprite_ext(sCombat_portrait_Mouv, 0, 12+ecart_x_barre_pv/2, 26, 2, 2, 0, c_white, 1)
+draw_sprite_ext(sCombat_portrait_Mouv, 0, 1279-12-ecart_x_barre_pv/2, 26, 2, 2, 0, c_white, 1)
+
+draw_sprite_ext(sBattle_cadre_vies, 0, 0, 0, 2, 2, 0, c_white, 1)
 
 // Vies
 
 if global.ruleset_style = "vies"
 {
-	if global.p2_inst.vies != 0 {p2_vies_nb_chiffres = floor(log10(global.p2_inst.vies)) + 1}
-	else {p2_vies_nb_chiffres = 1}
-	draw_text_transformed_color(ecart_x_barre_pv, taille_y_barre_pv, string(global.p1_inst.vies), 2, 2, 0, cvide, cvide, cvide, cvide, 1)
-	draw_text_transformed_color(1280-ecart_x_barre_pv-p2_vies_nb_chiffres*x_char_size, taille_y_barre_pv, string(global.p2_inst.vies), 2, 2, 0, cvide, cvide, cvide, cvide, 1)
+	var c_vies = make_colour_rgb(95, 0, 0)
+	var p1_dclg = 0
+	var p2_dclg = 0
+	if global.p1_inst.vies > 9 {var p1_dclg = 12}
+	if global.p2_inst.vies > 9 {var p2_dclg = 12}
+	
+	draw_text_transformed_color(x_pos_vies-p1_dclg, y_pos_vies, string(global.p1_inst.vies), 2, 2, 0, c_vies, c_vies, c_vies, c_vies, 1)
+	draw_text_transformed_color(1280-x_pos_vies-p2_dclg-26, y_pos_vies, string(global.p2_inst.vies), 2, 2, 0, c_vies, c_vies, c_vies, c_vies, 1)
 }

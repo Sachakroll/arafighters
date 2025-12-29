@@ -29,7 +29,6 @@ global.player1_key_down = vk_down
 global.player1_key_action1 = vk_enter
 global.player1_key_action2 = vk_rshift
 global.player1_key_guard = vk_rcontrol
-global.player1_key_grab = vk_backspace
 
 global.player1_key_pause = ord("P")
 
@@ -43,7 +42,6 @@ global.player2_key_down = ord("S")
 global.player2_key_action1 = vk_space
 global.player2_key_action2 = vk_lshift
 global.player2_key_guard = vk_lcontrol
-global.player2_key_grab = ord("A")
 
 global.player2_key_pause = ord("T")
 
@@ -64,7 +62,6 @@ global.p1_gp_jump = 0
 global.p1_gp_action1 = 1
 global.p1_gp_action2 = 2
 global.p1_gp_guard = 3
-global.p1_gp_grab = 4
 
 global.p1_gp_pause = 5
 
@@ -78,7 +75,6 @@ global.p2_gp_jump = 0
 global.p2_gp_action1 = 1
 global.p2_gp_action2 = 2
 global.p2_gp_guard = 3
-global.p2_gp_grab = 4
 
 global.p2_gp_pause = 5
 

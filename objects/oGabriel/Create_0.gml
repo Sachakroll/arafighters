@@ -99,32 +99,6 @@ atk_sideair_base_y_pos = -hand_height
 atk_sideair_base_x_pos = 22
 atk_sideair_portee_suppl_x = 16
 
-// Spe_b
-
-spe_b_type = "mitr_chb"
-spe_b_startup_time = 10
-spe_b_active_time = 0
-spe_b_recovery_time = 18
-
-spe_b_proj_t1_degats = 4
-spe_b_proj_t1_dmg_duration = 8
-spe_b_proj_t1_speed = 4
-
-spe_b_proj_t2_ch_time = 16
-spe_b_proj_t2_degats = 7
-spe_b_proj_t2_dmg_duration = 14
-spe_b_proj_t2_speed = 5
-
-spe_b_proj_t2_ch_time = 30
-spe_b_proj_t3_degats = 10
-spe_b_proj_t3_dmg_duration = 18
-spe_b_proj_t3_speed = 6
-
-spe_b_proj_t2_ch_time = 60
-spe_b_proj_t4_degats = 16
-spe_b_proj_t4_dmg_duration = 22
-spe_b_proj_t4_speed = 7
-
 // Spe_side
 
 spe_side_type = "boomerang"

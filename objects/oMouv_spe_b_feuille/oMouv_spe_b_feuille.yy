@@ -6,8 +6,8 @@
   "name":"oMouv_spe_b_feuille",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objets",
-    "path":"folders/Objets.yy",
+    "name":"Mouvet",
+    "path":"folders/Objets/Personnages/Mouvet.yy",
   },
   "parentObjectId":null,
   "persistent":false,

@@ -8,7 +8,6 @@ sneak = false
 on_ground = true
 has_jumped = false
 time_since_on_ground = 0
-doublejump_count = 0
 pushed_force = 0
 if player = 1 {dir = 1}
 if player = 2 {dir = -1}
@@ -18,21 +17,17 @@ if player = 2 {dir = -1}
 hand_height = 56
 
 ground_walk_acc = 0.7
-air_walk_acc = 0.25
+air_walk_acc = 0.2
 walk_acc = ground_walk_acc
-max_walksp = 4
-normal_jumpforce = 8
-normal_doublejumpforce = 6
+max_walksp = 3.6
+jumpforce = 7.75
 normal_headbounceforce = 4.5
 jump_cheat_time = 4
 
 sneak_acc = 0.4
-max_sneaksp = 1.5 // doit être plus petit que min_sideatk_speed et que min_dash_speed
-sneak_jumpforce = 6
+max_sneaksp = 1.4 // doit être plus petit que min_sideatk_speed et que min_dash_speed
 
 sneak_pixel_difference = 20
-max_doublejump_amount = 1
-min_doublejump_height = 8
 
 ground_frct = 0.3
 dash_frct = 0.15
@@ -51,8 +46,8 @@ collision_step = 0.1
 
 attack_timer = 0
 
-min_sideatk_speed = 1.6 // doit être plus grand que max_sneaksp
-min_dash_speed = 3.7 // doit être plus grand que max_sneaksp
+min_sideatk_speed = 1.5 // doit être plus grand que max_sneaksp
+min_dash_speed = 3.2 // doit être plus grand que max_sneaksp et plus petit que max_walksp
 
 // Atk_b
 atk_b_type = 0
@@ -132,7 +127,7 @@ if global.ruleset_style = "temps"
 	vies = 0
 }
 
-max_pv = 100
+max_pv = 120
 pv = max_pv
 
 dmg_timer = 0
@@ -295,5 +290,4 @@ key_action_1 = 0
 key_action_2 = 0
 key_action_1_hold = 0
 key_action_2_hold = 0
-key_action_1_end = 0
-key_action_2_end = 0
+key_guard = 0

@@ -29,10 +29,10 @@ winner = 0
 
 // Initialisations des personnages (à supprimmer plus tard)
 
-global.player1_char = oGabriel
-global.player2_char = oGabriel
-global.player1_hitbox_sprite = sGabriel_hitbox
-global.player2_hitbox_sprite = sGabriel_hitbox
+global.player1_char = oMouvet
+global.player2_char = oMouvet
+global.player1_hitbox_sprite = sMouv_hitbox
+global.player2_hitbox_sprite = sMouv_hitbox
 
 // Initilisation du timer
 
@@ -45,10 +45,10 @@ global.pause = 0
 
 // Réglages de l'interface
 
-ecart_x_barre_pv = 10
-ecart_y_barre_pv = 10
-taille_x_barre_pv = 479
-taille_y_barre_pv = 39
+ecart_x_barre_pv = 140
+ecart_y_barre_pv = 38
+taille_x_barre_pv = 395
+taille_y_barre_pv = 31
 
 p1_displayed_pv = 0
 p2_displayed_pv = 0
@@ -58,7 +58,10 @@ p2_old_pv = 0
 barre_pv_dmg_time = 10
 barre_pv_refill_time = 30
 
-x_pos_timer = 600
+x_pos_timer = 596
+y_pos_timer = 8
+x_pos_vies = 168
+y_pos_vies = 58
 x_char_size = 24
 
 // Initialisation des mécaniques de combat
