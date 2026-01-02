@@ -1,11 +1,12 @@
 // Initialisation
 
 timer = 0
-hsp = 0
-vsp = 0
 
 if type = "boomerang"
 {
+	hsp = 0
+	vsp = 0
+	
 	parti = false
 	retour = 0
 	retour_timer = 0

@@ -15,6 +15,7 @@ if player = 2 {dir = -1}
 // Initialisation des réglages par défaut
 
 hand_height = 56
+hand_x_pos = 0
 
 ground_walk_acc = 0.7
 air_walk_acc = 0.2
@@ -92,6 +93,7 @@ spe_b_recovery_time = 0
 spe_b_box_inst = -1
 
 n_max_projectiles_spe_b = 0
+spe_b_chg_time = 0
 
 // Spe_side
 spe_side_type = 0

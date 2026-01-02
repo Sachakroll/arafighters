@@ -66,7 +66,7 @@ x_char_size = 24
 
 // Initialisation des mécaniques de combat
 
-global.x_offscreen_projectile_margin = 64
+global.x_offscreen_projectile_margin = 72
 global.y_offscreen_projectile_margin = 32
 
 // Animations de double saut

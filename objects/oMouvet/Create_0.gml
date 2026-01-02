@@ -2,6 +2,7 @@ event_inherited()
 
 s_prefix = "sMouv"
 hand_height = 56
+hand_x_pos = 12
 sneak_pixel_difference = 16
 
 push_force = 1
@@ -107,20 +108,28 @@ spe_b_active_time = 0
 spe_b_recovery_time = 18
 
 spe_b_proj_t1_degats = 4
-spe_b_proj_t1_dmg_duration = 8
+spe_b_proj_t1_dmg_duration = 6
 spe_b_proj_t1_speed = 4
+spe_b_proj_t1_h_knockback = 1.25
+spe_b_proj_t1_v_knockback = -1.5
 
-spe_b_proj_t2_ch_time = 16
-spe_b_proj_t2_degats = 7
-spe_b_proj_t2_dmg_duration = 14
+spe_b_proj_t2_chg_time = 21
+spe_b_proj_t2_degats = 8
+spe_b_proj_t2_dmg_duration = 11
 spe_b_proj_t2_speed = 5
+spe_b_proj_t2_h_knockback = 2
+spe_b_proj_t2_v_knockback = -1.5
 
-spe_b_proj_t2_ch_time = 30
-spe_b_proj_t3_degats = 10
+spe_b_proj_t3_chg_time = 45
+spe_b_proj_t3_degats = 14
 spe_b_proj_t3_dmg_duration = 18
 spe_b_proj_t3_speed = 6
+spe_b_proj_t3_h_knockback = 3
+spe_b_proj_t3_v_knockback = -2
 
-spe_b_proj_t2_ch_time = 60
-spe_b_proj_t4_degats = 16
-spe_b_proj_t4_dmg_duration = 22
-spe_b_proj_t4_speed = 7
+spe_b_proj_t4_chg_time = 240
+spe_b_proj_t4_degats = 35
+spe_b_proj_t4_dmg_duration = 80
+spe_b_proj_t4_speed = 6
+spe_b_proj_t4_h_knockback = 4
+spe_b_proj_t4_v_knockback = -2.5

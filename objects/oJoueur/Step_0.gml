@@ -269,6 +269,7 @@ if mort && (vies != 0 || global.ruleset_style != "vies") && resurrect_timer >= r
 	mort = false
 	state = "neutral"
 	pv = max_pv
+	dmg_timer = 72
 }
 resurrect_timer	++
 
@@ -288,7 +289,7 @@ for (var i = 0; i < array_length(projectiles); i++)
 	
 	damage(projectile.degats, projectile.dmg_duration, projectile.h_knockback*sign(x-projectile.x), projectile.v_knockback)
 	
-	if projectile.type = "boomerang" 
+	if projectile.type = "boomerang" || projectile.type = "straight"
 	{projectile.actif = false}
 }
 
@@ -645,16 +646,13 @@ if atk() = "spe_b" && state = "neutral"
 {
 	if spe_b_type = "mitr_chb"
 	{
-		spe_b_box_inst = instance_create_layer(x, y-hand_height, "Player", oMouv_spe_b_feuille,
+		spe_b_box_inst = instance_create_layer(x+dir*hand_x_pos, y-hand_height, "Player", oMouv_spe_b_feuille,
 		{
 			owner : id,
-			degats : atk_sideair_degats,
-			dmg_duration : atk_sideair_dmg_duration,
-			h_knockback : atk_sideair_h_knockback,
-			v_knockback : atk_sideair_v_knockback,
-			actif : false,
-			atk_dir : dir
+			relative_x_pos : hand_x_pos,
+			relative_y_pos : -hand_height
 		})
+		spe_b_chg_time = 0
 	}
 	
 	state = "spe_b_startup"
@@ -662,16 +660,36 @@ if atk() = "spe_b" && state = "neutral"
 }
 
 if state = "spe_b_startup"
-{
+{	
 	if attack_timer >= spe_b_startup_time
 	{
 		state = "spe_b_active"
 		attack_timer = 0
 	}
+	
+	if spe_b_type = "mitr_chb"
+	{
+		if key_action_2_hold
+		{
+			state = "spe_b_startup"
+			attack_timer = 0
+			spe_b_chg_time ++
+		}
+	}
 }
 
 if state = "spe_b_active"
 {
+	if spe_b_type = "mitr_chb"
+	{
+		var projectile_tier = 1
+		if spe_b_chg_time >= spe_b_proj_t2_chg_time {projectile_tier = 2}
+		if spe_b_chg_time >= spe_b_proj_t3_chg_time {projectile_tier = 3}
+		if spe_b_chg_time >= spe_b_proj_t4_chg_time {projectile_tier = 4}
+		
+		spe_b_box_inst.shoot(projectile_tier, dir)
+	}
+	
 	if attack_timer >= spe_b_active_time
 	{
 		state = "spe_b_recovery"
@@ -681,9 +699,26 @@ if state = "spe_b_active"
 
 if state = "spe_b_recovery"
 {
+	if spe_b_type = "mitr_chb"
+	{
+		if key_action_2_hold
+		{
+			state = "spe_b_startup"
+			attack_timer = 0
+			spe_b_chg_time = 0
+		}
+	}
+	
 	if attack_timer >= spe_b_recovery_time
 	{
 		state = "neutral"
+		
+		if spe_b_type = "mitr_chb"
+		{
+			instance_destroy(spe_b_box_inst)
+			spe_b_box_inst = -1
+			spe_b_chg_time = 0
+		}
 	}
 }
 
