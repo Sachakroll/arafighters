@@ -8,7 +8,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 	{
 		key_left = keyboard_check(global.player1_key_left)
 		key_right = keyboard_check(global.player1_key_right)
-		key_jump = keyboard_check_pressed(global.player1_key_up)
+		key_jump = keyboard_check_pressed(global.player1_key_jump)
 		key_up = keyboard_check(global.player1_key_up)
 		key_down = keyboard_check(global.player1_key_down)
 		key_action_1 = keyboard_check_pressed(global.player1_key_action1)
@@ -21,7 +21,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 	{
 		key_left = keyboard_check(global.player2_key_left)
 		key_right = keyboard_check(global.player2_key_right)
-		key_jump = keyboard_check_pressed(global.player2_key_up)
+		key_jump = keyboard_check_pressed(global.player2_key_jump)
 		key_up = keyboard_check(global.player2_key_up)
 		key_down = keyboard_check(global.player2_key_down)
 		key_action_1 = keyboard_check_pressed(global.player2_key_action1)
@@ -32,7 +32,6 @@ if !mort && state != "damage" && oCombat.state = "combat"
 	}
 	if player = 1 && global.p1_controller != -1
 	{
-		var prev_key_up = key_up
 		var gp_move_x = gamepad_axis_value(global.p1_controller, global.p1_gp_x_axis)
 		var gp_move_y = gamepad_axis_value(global.p1_controller, global.p1_gp_y_axis)
 		key_left = gp_move_x < -global.gp_deadzone
@@ -45,7 +44,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 			key_up = gp_move_y < -global.gp_deadzone
 			key_down = gp_move_y > global.gp_deadzone
 		}
-		key_jump = (key_up && !prev_key_up) || gamepad_button_check_pressed(global.p1_controller, global.p1_gp_jump)
+		key_jump = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_jump)
 		key_action_1 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action1)
 		key_action_2 = gamepad_button_check_pressed(global.p1_controller, global.p1_gp_action2)
 		key_action_1_hold = gamepad_button_check(global.p1_controller, global.p1_gp_action1)
@@ -54,7 +53,6 @@ if !mort && state != "damage" && oCombat.state = "combat"
 	}
 	if player = 2 && global.p2_controller != -1
 	{
-		var prev_key_up = key_up
 		var gp_move_x = gamepad_axis_value(global.p2_controller, global.p2_gp_x_axis)
 		var gp_move_y = gamepad_axis_value(global.p2_controller, global.p2_gp_y_axis)
 		key_left = gp_move_x < -global.gp_deadzone
@@ -67,7 +65,7 @@ if !mort && state != "damage" && oCombat.state = "combat"
 			key_up = gp_move_y < -global.gp_deadzone
 			key_down = gp_move_y > global.gp_deadzone
 		}
-		key_jump = (key_up && !prev_key_up) || gamepad_button_check_pressed(global.p2_controller, global.p2_gp_jump)
+		key_jump = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_jump)
 		key_action_1 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action1)
 		key_action_2 = gamepad_button_check_pressed(global.p2_controller, global.p2_gp_action2)
 		key_action_1_hold = gamepad_button_check(global.p2_controller, global.p2_gp_action1)
@@ -808,6 +806,54 @@ if state = "spe_side_active"
 if state = "spe_side_recovery"
 {
 	if attack_timer >= spe_side_recovery_time
+	{
+		state = "neutral"
+	}
+}
+
+// Spe_up
+
+if atk() = "spe_up" && state = "neutral"
+{
+	state = "spe_up_startup"
+	attack_timer = 0
+}
+
+if state = "spe_up_startup"
+{	
+	if attack_timer >= spe_b_startup_time
+	{
+		state = "spe_up_active"
+		attack_timer = 0
+		
+		if spe_up_type = "grnd_spear"
+		{
+			instance_create_layer(x+spe_up_spear_relative_xpos, y, "Player", spe_up_spear_obj, {
+				owner : id,
+				max_size : spe_up_spear_size,
+				rel_xpos : spe_up_spear_relative_xpos
+			})
+			instance_create_layer(x-spe_up_spear_relative_xpos, y, "Player", spe_up_spear_obj, {
+				owner : id,
+				max_size : spe_up_spear_size,
+				rel_xpos : -spe_up_spear_relative_xpos
+			})
+		}
+	}
+}
+
+if state = "spe_up_active"
+{	
+	if attack_timer >= spe_b_active_time
+	{
+		state = "spe_up_recovery"
+		attack_timer = 0
+	}
+}
+
+if state = "spe_up_recovery"
+{	
+	if attack_timer >= spe_b_recovery_time
 	{
 		state = "neutral"
 	}

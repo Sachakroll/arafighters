@@ -26,6 +26,8 @@ global.player1_key_right = vk_right
 global.player1_key_up = vk_up
 global.player1_key_down = vk_down
 
+global.player1_key_jump = ord("M")
+
 global.player1_key_action1 = vk_enter
 global.player1_key_action2 = vk_rshift
 global.player1_key_guard = vk_rcontrol
@@ -38,6 +40,8 @@ global.player2_key_left = ord("Q")
 global.player2_key_right = ord("D")
 global.player2_key_up = ord("Z")
 global.player2_key_down = ord("S")
+
+global.player1_key_jump = ord("A")
 
 global.player2_key_action1 = vk_space
 global.player2_key_action2 = vk_lshift

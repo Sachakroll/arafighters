@@ -3,7 +3,7 @@ init = 0
 state = "fade1"
 fade_time = 60
 fade_timer = 0
-written_text = "Sautez avec le joystick !"
+written_text = "Baissez-vous avec le joystick !"
 
 text_alpha = 0
 text_default_x = 320*2

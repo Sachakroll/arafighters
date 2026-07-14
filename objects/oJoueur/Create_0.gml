@@ -253,6 +253,7 @@ function atk()
 		}
 	}
 }
+
 /*function atk_charge()
 {
 	if state = "neutral"

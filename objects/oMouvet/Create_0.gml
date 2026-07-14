@@ -133,3 +133,20 @@ spe_b_proj_t4_dmg_duration = 80
 spe_b_proj_t4_speed = 6
 spe_b_proj_t4_h_knockback = 4
 spe_b_proj_t4_v_knockback = -2.5
+
+// Spe_up
+
+spe_up_type = "grnd_spear"
+spe_up_startup_time = 10
+spe_up_active_time = 30
+spe_up_recovery_time = 18
+
+spe_up_spear_obj = oMouv_spe_up_vector
+spe_up_tip_sprite = sMouv_atk_dash_box
+spe_up_spear_size = 60
+spe_up_spear_relative_xpos = 30
+
+spe_up_degats = 12
+spe_up_dmg_duration = 6
+spe_up_h_knockback = 1.25
+spe_up_v_knockback = -1.5

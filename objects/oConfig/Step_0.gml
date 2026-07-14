@@ -4,38 +4,36 @@ if state = "fade1"
 	text_alpha += 2/fade_time
 	if fade_timer = fade_time
 	{
-		state = "pre_jump"
+		state = "pre_bas"
 	}
 }
 
-if state = "pre_jump"
+if state = "pre_bas"
 {
 	text_alpha = 1
 	for (var i = 0; i <= gamepad_axis_count(gamepad); i++)
 	{
 	    if abs(gamepad_axis_value(gamepad, i)) > global.gp_deadzone
 		{
-			state = "jump"
+			state = "bas"
 			timer = 0
-			vsp = -jump_force
 			y_axis = i
 			if gamepad_axis_value(gamepad, i) > 0
 			{
-				invert_y_axis = 1
+				invert_y_axis = 0
 			}
 			if gamepad_axis_value(gamepad, i) < 0
 			{
-				invert_y_axis = 0
+				invert_y_axis = 1
 			}
 			break
 		}
 	}
 }
 
-if state = "jump"
+if state = "bas"
 {
 	timer ++
-	vsp += g_acc
 	if timer < time/2
 	{
 		text_alpha -= 2/time
